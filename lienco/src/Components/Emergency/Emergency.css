@@ -1,0 +1,32 @@
+/* EmergencyButton.css */
+.emergency {
+    background-color: red; /* Button color */
+    color: white; /* Text color */
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    animation: blink 1s infinite; /* Blink animation */
+    box-shadow: 0 0 70px rgba(255, 10, 10, 1.8);
+   
+}
+
+.emergency:hover{
+    background-color: #ff0000;
+    box-shadow: 0px 15px 20px rgba(255, 0, 0, 0.4);
+    color: #fff;
+    transform: translateY(-1px);
+}
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+

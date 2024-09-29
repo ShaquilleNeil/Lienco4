@@ -1,0 +1,18 @@
+.stats{
+    display: flex;
+    gap: 20px;
+    width: 95%;
+    margin-top: 50px;
+    justify-content: space-between;
+    padding: 20px 10px 0 40px;
+}
+
+.stats-container{
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    flex: 1;
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+}
