@@ -1,4 +1,11 @@
 
 .dashuser {
-
+    background-image: linear-gradient(90deg, #000000,#2C272E);
+ height: 100vh;
+ width: 100vw;
+ display: flex;
+ justify-content: center;
+ align-items: center;
 }
+
+

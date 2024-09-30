@@ -31,7 +31,7 @@
     background-color: rgba(56, 62, 77, 0.288); 
     padding:30px;
     width: 90%;
-    height: 750px;
+    height: 700px;
     float: right;
     text-align: left;
     display: grid;
@@ -47,7 +47,7 @@
 }
 
 .info-side h1{
-    padding: 100px;
+    padding: 0px;
     text-align: left;
     font-size: 30px;
     color: rgb(255, 255, 255);
