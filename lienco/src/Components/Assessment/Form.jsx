@@ -91,6 +91,8 @@ const Form = ({ isAssessVisisble, onClose}) => {
         
 
         <form onSubmit={handleSubmit} onClick={(e) => e.stopPropagation()} noValidate>
+        <span className="icon-close" onClick={onClose}>X</span>
+            <h2>ON-SITE ASSESSMENT REQUEST FORM</h2>
                         <div className="form-group">
                             <label htmlFor="fullName">Full Name:</label>
                             <input type="text" id="fullName" name="fullName" value={formData.fullName} onChange={handleChange} required />

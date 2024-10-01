@@ -3,6 +3,7 @@ import './DashUser.css'
 import Header from './Header.jsx'
 import Sidebar from './SideBar.jsx'
 import Card from './Card.jsx';
+import im1 from '../Images/projects.jpg';
 
 const DashUser = () => {
 
@@ -11,7 +12,7 @@ const DashUser = () => {
       id: 1, // Added unique ID
       title: "Projects",
       description: "Track your projects with ease. ",
-      imageUrl: "https://i.imgur.com/QYWAcXk.jpeg"
+      imageUrl: im1
     },
     {
       id: 2, // Added unique ID

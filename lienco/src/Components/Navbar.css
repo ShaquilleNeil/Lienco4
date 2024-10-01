@@ -21,9 +21,9 @@
 }
 
 .nav-logo{
-    padding-top: 80px;
-    height: 200px;
-    width: 200px;
+    padding-top: 50px;
+    height: 120px;
+    width: 120px;
 }
 
 .nav-menu{
@@ -35,19 +35,22 @@
     font-weight: 700;
 }
 
+
+
 .nav-menu li{
     cursor: pointer;
 }
 
+
 .nav-menu li a{
     text-decoration: none;
     color: white;
-    font-size: 20px;
+    font-size: 18px;
     transition: color 0.3s;
 }
 
 .nav-menu li a:hover{
-    border-bottom: 3px solid #00c3ff;
+    border-bottom: 3px solid #fffb00;
     
 }
 

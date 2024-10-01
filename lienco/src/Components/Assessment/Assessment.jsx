@@ -32,7 +32,7 @@ const Assessment = () => {
         </div>
          <div className='container2'>
           <h2>ESTIMATE CALCULATOR</h2>
-          <h2 className='click'>Click Here</h2>
+          <h2 className='click'>COMING SOON</h2>
         </div> 
 
 

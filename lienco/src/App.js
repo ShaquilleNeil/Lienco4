@@ -6,6 +6,7 @@ import Assessment from './Components/Assessment/Assessment';
 import Contact from './Components/Contact/Contact';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Dashboard from './Components/Dashboard/DashUser';
+import Reset from './Components/Popup/Reset';
 
 
 
@@ -51,7 +52,9 @@ function App() {
           </>
         } />
         <Route path="/dashboard" element={<Dashboard />} /> {/* No Navbar here */}
+        <Route path="/reset" element={<Reset />} /> {/* Reset password route */}
       </Routes>
+
     </div>
   </Router>
   );

@@ -1,6 +1,6 @@
-// src/Popup.js
 import React, { useState } from 'react';
 import { login } from '../Auth'; // Make sure to import your login function
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './Popup.css';
 
 const Popup = ({ isVisible, onClose, onLogin }) => {
@@ -32,8 +32,8 @@ const Popup = ({ isVisible, onClose, onLogin }) => {
           </span>
           
           <form onSubmit={handleSubmit}>
-          <h1>Login</h1>
           <span className="icon-close" onClick={onClose}>X</span>
+            <h1>Login</h1>
             <label htmlFor="email">Email:</label>
             <input
               type="email"
@@ -57,6 +57,9 @@ const Popup = ({ isVisible, onClose, onLogin }) => {
             {error && <p className="error-message">{error}</p>}
             <div className='btn'>
               <button type="submit" className='popup-button1'>Login</button>
+            </div>
+            <div className="reset-password">
+              <Link to="/reset">Forgot your password?</Link>
             </div>
           </form>
         </div>

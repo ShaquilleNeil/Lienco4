@@ -29,11 +29,13 @@
   backdrop-filter: blur(20px);
   box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
  margin-bottom: 80px;
+
 }
 
 .error-message {
   color: red;
-  margin-top: 10px;
+  margin-top: 0;
+  padding-bottom: 0;
 }
 
 .aform-content form input[type="email"],
@@ -43,8 +45,8 @@
 .aform-content form select {
     display: block;
     width: 90%;
-    height: 10px;
-    margin-bottom: 10px;
+    height: 8px;
+    margin-bottom: 0;
     border: none;
     outline: none;
     padding: 10px;
@@ -53,9 +55,30 @@
     background-color: rgb(255, 255, 255);
     color: #333;
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-    margin-top: 20px;
-    margin-bottom: 20px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif ;
+    margin-bottom: 10px;
 }
+
+.aform-content form textarea{
+    display: block;
+    width: 90%;
+    height: 150px;
+    margin-bottom: 0;
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    color: #333;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    font-family:Verdana, Geneva, Tahoma, sans-serif ;
+    margin-bottom: 10px;
+}
+
+
+
+
 
 .aform-content form label {
     display: flex;
@@ -74,7 +97,8 @@
     border-radius: 50px;
     color: #fff;
     cursor: pointer;
-    box-shadow: 0 0 40px rgba(255, 255, 255, 1.8);
+    border: 1px solid rgba(255,255,255,1.8);
+    font-size: 30px;
      font-weight: 500;
      margin-top: 30px;
      display: flex;
@@ -85,13 +109,17 @@
  
    .aform-content form h2 {
      text-align: center;
-     margin-bottom: 20px;
+     margin-bottom: 50px;
      color: #fff;
+     text-decoration: underline;
    }
  
    .aform-content form .aformbutton:hover {
-     background-color: rgba(255, 255, 255, 0.8);
-     color: #000000;
+    background-color: #d4af37;
+    box-shadow: 0px 15px 20px #d4af37b7;
+    color: #fff;
+    transform: translateY(-7px);
+    border: 0.5px solid #000000;
    }
 
    .aform-content .aformicon-close {

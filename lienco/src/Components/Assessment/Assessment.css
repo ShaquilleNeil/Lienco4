@@ -82,10 +82,11 @@
   .container2:hover h2 {
     left: 300px;
     transform: scale(.8);
+    
   }
 
 .container2 {
-
+    
     background-image: url('./OIP.jpg');
   }
   

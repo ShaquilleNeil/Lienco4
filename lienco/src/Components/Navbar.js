@@ -23,20 +23,20 @@ const Navbar = ({ isLoggedIn, onLogout}) => {
 
     <ul className='nav-menu'>
       <li>
-        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/">HOME</RouterLink>
       </li>
       <li>
-        <RouterLink to="/about">About Us</RouterLink>
+        <RouterLink to="/about">ABOUT US</RouterLink>
       </li>
       <li>
-        <RouterLink to="/assessment">Assessment</RouterLink>
+        <RouterLink to="/assessment">ASSESSMENT</RouterLink>
       </li>
       <li>
-        <RouterLink to="/contact">Contact Us</RouterLink>
+        <RouterLink to="/contact">CONTACT US</RouterLink>
       </li>
       {isLoggedIn && (
         <li>
-          <RouterLink to="/dashboard" className='dashboard-button'>Dashboard</RouterLink>
+          <RouterLink to="/dashboard" className='dashboard-button'>DASHBOARD</RouterLink>
         </li>
       )}
       {isLoggedIn && (

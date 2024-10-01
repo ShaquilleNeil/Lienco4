@@ -14,7 +14,7 @@
     opacity: 0.85;
     z-index: 2;
     position: fixed;
-    width: 200px;
+    width: 150px;
     box-shadow: 7px 7px 30px rgba(76, 117, 85, 0.301);
 }
 
@@ -42,7 +42,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 90px;
-    font-size: 15px;
+    font-size: 10px;
     font-weight: 700;
     padding: 10px;
     padding-right: 40px;
@@ -51,20 +51,26 @@
 
 .sidenav-menu li{
     cursor: pointer;
+    width: 100%;
+    padding: 0px;  
+    text-align: center;
+    border-radius: 20px;
+    font-size: 10px;
+   
 }
 
 .sidenav-menu li a{
     text-decoration: none;
     color: white;
     font-size: 20px;
-    transition: color 0.3s;
+ 
+    
 }
 
 .sidenav-menu li a:hover{
     background-color: #2EE59D;
     box-shadow: 0px 15px 20px rgba(28, 253, 163, 0.4);
-  padding: 24px 10px;
-  border-radius: 20px;
+ 
  
     
 }

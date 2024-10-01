@@ -3,6 +3,7 @@ import { auth } from './firebase';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 
 // Sign Up Function
@@ -14,3 +15,6 @@ export const register = async (email, password) => {
 export const login = async (email, password) => {
   return await signInWithEmailAndPassword(auth, email, password);
 };
+
+
+

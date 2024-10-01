@@ -111,10 +111,11 @@ h4{
 }
 
 .login:hover{
-    background-color: #2EE59D;
-    box-shadow: 0px 15px 20px rgba(28, 253, 163, 0.4);
+    background-color: #d4af37;
+    box-shadow: 0px 15px 20px #d4af37b7;
     color: #fff;
     transform: translateY(-7px);
+    border: 0.5px solid #000000;
 }
 
 .signup{
@@ -136,8 +137,9 @@ h4{
 }
 
 .signup:hover{
-    background-color: #00c3ff;
-    box-shadow: 0px 15px 20px rgba(46, 217, 229, 0.4);
+    background-color: #d4af37;
+    box-shadow: 0px 15px 20px #d4af37b7;
     color: #fff;
     transform: translateY(-7px);
+    border: 0.5px solid #000000;
 }
