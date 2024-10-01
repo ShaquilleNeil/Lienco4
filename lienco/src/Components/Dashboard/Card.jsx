@@ -17,7 +17,7 @@ const Card = ({ title, description, imageUrl }) => {
           <h2 className="card__title">{title}</h2>
           <p className="card__description">{description}</p>
         </div>
-        <button className="card__button">Read more</button>
+        <button className="card__button">Go</button>
       </div>
     </article>
   );

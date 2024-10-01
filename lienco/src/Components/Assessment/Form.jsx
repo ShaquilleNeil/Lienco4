@@ -114,6 +114,10 @@ const Form = ({ isAssessVisisble, onClose}) => {
                                 <option value="">Select an option</option>
                                 <option value="plumbing">Plumbing</option>
                                 <option value="electrical">Electrical</option>
+                                <option value="electrical">Structural</option>
+                                <option value="electrical">Outdoor</option>
+                                <option value="electrical">Indoor</option>
+                            
                             </select>
                             {errors.assessmentType && <div className="error-message">{errors.assessmentType}</div>}
                         </div>
@@ -123,7 +127,7 @@ const Form = ({ isAssessVisisble, onClose}) => {
                             {errors.location && <div className="error-message">{errors.location}</div>}
                         </div>
                         <div className="form-group">
-                            <label htmlFor="message">Message:</label>
+                            <label htmlFor="message">Specifics:</label>
                             <textarea id="message" name="message" rows="4" value={formData.message} onChange={handleChange}></textarea>
                             {errors.message && <div className="error-message">{errors.message}</div>}
                         </div>
