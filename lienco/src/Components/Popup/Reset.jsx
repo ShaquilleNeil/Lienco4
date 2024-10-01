@@ -39,7 +39,7 @@ const Reset = () => {
        <div className='reset-container'>
       
       <form onSubmit={handleReset}>
-      <span className="icon-close" onClick={handleClose}>X</span>
+      {/* <span className="icon-close" onClick={handleClose}>X</span> */}
       <h2>Reset Password</h2>
         <label htmlFor="reset-email">Enter your email:</label>
         <input

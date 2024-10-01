@@ -51,7 +51,7 @@ useEffect(() => {
 
         <h1>LienCo Construction</h1> <br />
         <div className='line'></div>
-        <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h4><br />
+        <h4>Construction excellence with a little extra.</h4><br />
         
         <div className="btn">
           {!isLoggedIn ? (
