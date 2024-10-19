@@ -7,6 +7,8 @@ import Contact from './Components/Contact/Contact';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Dashboard from './Components/Dashboard/DashUser';
 import Reset from './Components/Popup/Reset';
+import PMDashboard from './Components/Dashboard/PMDashboard/PMDashUser';
+import AdminDashboard from './Components/Dashboard/ADDash/ADDashUser';
 
 
 
@@ -14,49 +16,46 @@ function App() {
 
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState(null);
+
+  
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    setUserRole(null);
   };
 
-  const handleLogin = () => {
+  const handleLogin = (role) => {
     setIsLoggedIn(true);
+    setUserRole(role);
   };
 
   return (
     <Router>
-    <div>
-      <Routes>
-        <Route path="/" element={
-          <>
-            <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-            <Hero isLoggedIn={isLoggedIn} onLogin={handleLogin} />
-          </>
-        } />
-        <Route path="/about" element={
-          <>
-            <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-            <About />
-          </>
-        } />
-        <Route path="/assessment" element={
-          <>
-            <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-            <Assessment />
-          </>
-        } />
-        <Route path="/contact" element={
-          <>
-            <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-            <Contact />
-          </>
-        } />
-        <Route path="/dashboard" element={<Dashboard />} /> {/* No Navbar here */}
-        <Route path="/reset" element={<Reset />} /> {/* Reset password route */}
-      </Routes>
-
-    </div>
-  </Router>
+      <div>
+        <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+        <Routes>
+          <Route path="/" element={<Hero isLoggedIn={isLoggedIn} onLogin={handleLogin} />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/assessment" element={<Assessment />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/reset" element={<Reset />} />
+          <Route 
+            path="/dashboard" 
+            element={
+              userRole === 'admin' ? (
+                <AdminDashboard />
+              ) :
+              userRole === 'project manager' ? (
+                <PMDashboard />
+              ) : (
+                <Dashboard />
+              )
+            } 
+          /> {/* Render different dashboards based on user role */}
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

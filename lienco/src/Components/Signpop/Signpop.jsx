@@ -4,7 +4,6 @@ import { register } from '../Auth'; // Import your register function
 import './signpop.css';
 
 const Signpop = ({ isSignVisible, onClose }) => {
-  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -39,16 +38,7 @@ const Signpop = ({ isSignVisible, onClose }) => {
           <form onSubmit={handleSubmit}>
           <h1>Sign up</h1>
           <span className="icon-close" onClick={onClose}>X</span>
-            <label htmlFor="username">Username:</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              placeholder='example'
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
+             
             <label htmlFor="email">Email:</label>
             <input
               type="email"
