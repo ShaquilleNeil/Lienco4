@@ -1,51 +1,23 @@
-import React from 'react'
-import './ADDashUser.css'
-import Header from '../Header.jsx'
-import Sidebar from '../SideBar.jsx'
-import im1 from '../../Images/projects.jpg';
+import React from 'react';
+import './ADDashUser.css';
+import Header from '../Header.jsx';
+import Sidebar from '../SideBar.jsx';
+import ManageUserRoles from './ManageUserRoles'; // Import your role management component
 
 const DashUser = () => {
-
-  // const cardData = [
-  //   {
-  //     id: 1, // Added unique ID
-  //     title: "Projects",
-  //     description: "Track your projects with ease. ",
-  //     imageUrl: im1
-  //   },
-  //   {
-  //     id: 2, // Added unique ID
-  //     title: "Resources",
-  //     description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in labore laudantium deserunt fugiat numquam.",
-  //     imageUrl: "https://i.imgur.com/QYWAcXk.jpeg"
-  //   },
-  //   {
-  //     id: 3, // Added unique ID
-  //     title: "Contact Project Manager",
-  //     description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in labore laudantium deserunt fugiat numquam.",
-  //     imageUrl: "https://i.imgur.com/QYWAcXk.jpeg"
-  //   },
-  // ];
   return (
-    <div className='dashuser'>
+    <div className='addash'>
       <Header />
       <Sidebar />
+      
+      <div className='cards'>
+        {/* Other cards or components can go here */}
 
-     <div className='cards'>
-      <figure>
-    <img src="https://picsum.photos/id/287/250/300" alt="Mountains"/>
-    <figcaption>The Day</figcaption>
-</figure>
-<figure >
-    <img src="https://picsum.photos/id/475/250/300" alt="Mountains"/>
-    <figcaption>The Night</figcaption>
-</figure>
-
-
-
-</div>
+        {/* Render the ManageUserRoles component for admin access */}
+        <ManageUserRoles />
+      </div>
     </div>
-  )
+  );
 }
 
-export default DashUser
+export default DashUser;
