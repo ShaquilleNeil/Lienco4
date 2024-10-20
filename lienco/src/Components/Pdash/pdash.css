@@ -1,0 +1,30 @@
+.pdash {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  height: 100vh; /* Full viewport height */
+  background-image: linear-gradient(90deg, #000000, #2C272E);
+}
+
+.header-sidebar-container {
+  display: flex; /* Use flexbox for header and sidebar */
+  width: 100%; /* Full width */
+}
+
+.pdash h1 {
+  text-align: center; /* Center the title */
+  margin: 90px 0; /* Space above and below the title */
+  color: white; /* Adjust color as needed */
+}
+
+.ticket-container {
+  flex: 1; /* Take remaining space */
+  overflow-y: auto; /* Allow scrolling */
+  padding: 20px; /* Add padding */
+ 
+  margin-left: 200px; /* Adjust based on your sidebar width */
+}
+
+.sidebar {
+  width: 200px; /* Sidebar width */
+  /* You can add more styling for the sidebar here */
+}

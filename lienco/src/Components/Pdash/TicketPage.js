@@ -1,0 +1,209 @@
+import { useState, useEffect, useContext } from 'react';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import CategoriesContext from './context';
+import { db } from '../firebase';
+import { collection, addDoc, doc, updateDoc, getDoc } from 'firebase/firestore';
+import Header from '../Dashboard/Header.jsx';
+import Sidebar from '../Dashboard/SideBar.jsx';
+import './ticketpage.css';
+
+const TicketPage = () => {
+  const location = useLocation();
+  const editMode = location.state?.editMode || false; // Use location state to determine edit mode
+
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    category: '',
+    newCategory: '',
+    priority: 1,
+    status: 'not started',
+    progress: 0,
+    owner: '',
+    avatar: '',
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const { categories } = useContext(CategoriesContext);
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    try {
+      if (editMode) {
+        const ticketRef = doc(db, 'tickets', id);
+        await updateDoc(ticketRef, formData);
+      } else {
+        await addDoc(collection(db, 'tickets'), formData);
+      }
+      navigate('/pdash', { state: { refresh: true } });
+    } catch (error) {
+      console.error('Submission failed:', error);
+      setError(`Failed to submit the ticket: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchData = async () => {
+    try {
+      const ticketRef = doc(db, 'tickets', id);
+      const ticketDoc = await getDoc(ticketRef);
+      if (ticketDoc.exists()) {
+        setFormData(ticketDoc.data());
+      } else {
+        console.error('No such document!');
+      }
+    } catch (error) {
+      console.error('Error fetching ticket:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (editMode) {
+      fetchData();
+    }
+  }, [editMode]);
+
+  return (
+    <div className="ticket">
+      <Header />
+      <Sidebar />
+      <h1>{editMode ? 'Update Your Ticket' : 'Create a Ticket'}</h1>
+      {loading && <p>Loading...</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <div className="ticket-container">
+        <form onSubmit={handleSubmit}>
+          <section>
+            <label htmlFor="title">Title</label>
+            <input
+              id="title"
+              name="title"
+              type="text"
+              onChange={handleChange}
+              required
+              value={formData.title}
+            />
+
+            <label htmlFor="description">Description</label>
+            <input
+              id="description"
+              name="description"
+              type="text"
+              onChange={handleChange}
+              required
+              value={formData.description}
+            />
+
+            <label>Category</label>
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+            >
+              {categories?.map((category, index) => (
+                <option key={index} value={category}>
+                  {category}
+                </option>
+              ))}
+              <option value="">Select a category</option>
+            </select>
+
+            <label htmlFor="new-category">New Category</label>
+            <input
+              id="new-category"
+              name="newCategory"
+              type="text"
+              onChange={handleChange}
+            />
+
+            <label>Priority</label>
+            <div className="multiple-input-container">
+              {[1, 2, 3, 4, 5].map((priority) => (
+                <div key={priority}>
+                  <input
+                    id={`priority-${priority}`}
+                    name="priority"
+                    type="radio"
+                    onChange={handleChange}
+                    value={priority}
+                    checked={formData.priority == priority}
+                  />
+                  <label htmlFor={`priority-${priority}`}>{priority}</label>
+                </div>
+              ))}
+            </div>
+
+            {editMode && (
+              <>
+                <input
+                  type="range"
+                  id="progress"
+                  name="progress"
+                  value={formData.progress}
+                  min="0"
+                  max="100"
+                  onChange={handleChange}
+                />
+                <label htmlFor="progress">Progress</label>
+
+                <label>Status</label>
+                <select
+                  name="status"
+                  value={formData.status}
+                  onChange={handleChange}
+                >
+                  <option value="done">Done</option>
+                  <option value="working on it">Working on it</option>
+                  <option value="stuck">Stuck</option>
+                  <option value="not started">Not Started</option>
+                </select>
+              </>
+            )}
+
+            <input type="submit" disabled={loading} />
+          </section>
+
+          <section>
+            <label htmlFor="owner">Owner</label>
+            <input
+              id="owner"
+              name="owner"
+              type="text"
+              onChange={handleChange}
+              required
+              value={formData.owner}
+            />
+
+            <label htmlFor="avatar">Avatar</label>
+            <input
+              id="avatar"
+              name="avatar"
+              type="url"
+              onChange={handleChange}
+            />
+            <div className="img-preview">
+              {formData.avatar && (
+                <img src={formData.avatar} alt="image preview" />
+              )}
+            </div>
+          </section>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default TicketPage;

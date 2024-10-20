@@ -9,6 +9,9 @@ import Dashboard from './Components/Dashboard/DashUser';
 import Reset from './Components/Popup/Reset';
 import PMDashboard from './Components/Dashboard/PMDashboard/PMDashUser';
 import AdminDashboard from './Components/Dashboard/ADDash/ADDashUser';
+import Projects from './Components/Pdash/Dashboard';
+import Tickets from './Components/Pdash/TicketPage';
+
 
 
 
@@ -40,6 +43,9 @@ function App() {
           <Route path="/assessment" element={<Assessment />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/reset" element={<Reset />} />
+          <Route path="/pdash" element={<Projects />} />
+          <Route path="/ticket" element={<Tickets />} />
+          <Route path="/ticket/:id" element={<Tickets editMode={true} />} />
           <Route 
             path="/dashboard" 
             element={
