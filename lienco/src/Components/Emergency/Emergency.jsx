@@ -1,7 +1,25 @@
-import React, { useState } from 'react'
-import './Emergency.css'
-const Emergency = () => {
+import React, { useState } from 'react';
+import './Emergency.css';
 
+const emergencyNumbers = [
+    { name: "Emergency Services", number: "15146633754", latitude: 40.730610, longitude: -73.935242 }, // Example coordinates
+    { name: "Fire Department", number: "15146633755", latitude: 40.730620, longitude: -73.935252 },
+    { name: "Chadi", number: "15146633754", latitude: 40.730630, longitude: -73.935262 },
+    // Add more numbers as needed
+];
+
+const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 6371; // Radius of the Earth in km
+    const dLat = (lat2 - lat1) * (Math.PI / 180);
+    const dLon = (lon2 - lon1) * (Math.PI / 180);
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; // Distance in km
+};
+
+const Emergency = () => {
     const [location, setLocation] = useState(null);
 
     const handleEmergencyClick = () => {
@@ -20,46 +38,31 @@ const Emergency = () => {
     };
 
     const triggerCall = (latitude, longitude) => {
-        // Calculate the appropriate phone number based on proximity
-        const phoneNumber = getEmergencyNumber(latitude, longitude);
-        
-        // Use window.location to initiate a phone call
-        if (phoneNumber) {
-            window.location.href = `tel:${phoneNumber}`;
+        let closestNumber = null;
+        let closestDistance = Infinity;
+
+        // Calculate the closest emergency number
+        emergencyNumbers.forEach(emergency => {
+            const distance = calculateDistance(latitude, longitude, emergency.latitude, emergency.longitude);
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestNumber = emergency.number;
+            }
+        });
+
+        // Initiate the phone call
+        if (closestNumber) {
+            window.location.href = `tel:${closestNumber}`;
         } else {
             alert('No emergency number available for this location.');
         }
     };
 
-    const getEmergencyNumber = (latitude, longitude) => {
-        // Add logic to determine phone number based on proximity
-        // This could be a lookup in a database or a simple conditional
-        const emergencyNumber = '15146633754'
-        // For example:
-        if (latitude && longitude) {
-            // Example condition based on arbitrary proximity logic
-            if (latitude > 40.0) {
-                return emergencyNumber; // Example for a specific area
-            }
-            // Add more conditions as needed
-        }
-        return null; // Default case
-    };
-
-
-
-
-
-
-
-  return (
-   
-        
-    <button className="emergency" onClick={handleEmergencyClick}>
-           <b> Emergency</b>
+    return (
+        <button className="emergency" onClick={handleEmergencyClick}>
+            <b> Emergency</b>
         </button>
-   
-  )
-}
+    );
+};
 
-export default Emergency
+export default Emergency;
