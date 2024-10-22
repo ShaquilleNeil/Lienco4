@@ -59,7 +59,7 @@ const Dashboard = () => {
         {uniqueCategories.length > 0 ? (
           uniqueCategories.map((uniqueCategory, categoryIndex) => (
             <div key={categoryIndex}>
-              <h3>{uniqueCategory}</h3>
+              <h2>{uniqueCategory}</h2>
               {tickets
                 .filter((ticket) => ticket.category === uniqueCategory)
                 .map((filteredTicket) => (

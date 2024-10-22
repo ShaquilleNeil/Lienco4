@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import CategoriesContext from './context';
 import { db } from '../firebase';
-import { collection, addDoc, doc, updateDoc, getDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, updateDoc, getDoc, getDocs } from 'firebase/firestore';
 import Header from '../Dashboard/Header.jsx';
 import Sidebar from '../Dashboard/SideBar.jsx';
 import './ticketpage.css';
@@ -11,10 +11,11 @@ const TicketPage = () => {
   const location = useLocation();
   const editMode = location.state?.editMode || false; // Use location state to determine edit mode
 
+  const [categories, setCategories] = useState([]); // State for categories
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    category: '',
+    category: '', // This should match the field in Firestore
     newCategory: '',
     priority: 1,
     status: 'not started',
@@ -24,9 +25,29 @@ const TicketPage = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { categories } = useContext(CategoriesContext);
   const navigate = useNavigate();
   const { id } = useParams();
+
+  // Function to fetch categories from Firestore
+// Function to fetch categories from Firestore
+const fetchCategories = async () => {
+  try {
+    const querySnapshot = await getDocs(collection(db, 'tickets')); // Replace with your collection name
+    const categoriesArray = [];
+
+    querySnapshot.forEach((doc) => {
+      const category = doc.data().category; // Get category
+      if (category && !categoriesArray.includes(category)) { // Check if the category is not already included
+        categoriesArray.push(category); // Push category without quotes
+      }
+    });
+
+    setCategories(categoriesArray); // Set unique categories
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+  }
+};
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -72,6 +93,7 @@ const TicketPage = () => {
   };
 
   useEffect(() => {
+    fetchCategories(); // Fetch categories when the component mounts
     if (editMode) {
       fetchData();
     }
@@ -113,12 +135,12 @@ const TicketPage = () => {
               value={formData.category}
               onChange={handleChange}
             >
-              {categories?.map((category, index) => (
+              <option value="">Select a category</option>
+              {categories.map((category, index) => (
                 <option key={index} value={category}>
                   {category}
                 </option>
               ))}
-              <option value="">Select a category</option>
             </select>
 
             <label htmlFor="new-category">New Category</label>

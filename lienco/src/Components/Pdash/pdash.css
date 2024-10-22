@@ -28,3 +28,7 @@
   width: 200px; /* Sidebar width */
   /* You can add more styling for the sidebar here */
 }
+
+h2 {
+  color: rgb(253, 253, 150);
+}

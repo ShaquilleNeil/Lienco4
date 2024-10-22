@@ -12,7 +12,8 @@ const TicketCard = ({ color, ticket }) => {
       <Link 
         to={`/ticket/${ticket.documentId}`} // Update this path to match your routing
         id="link"
-        state={{ editMode: true }} // Pass editMode state here
+        state={{ editMode: true }} 
+        className="link-no-underline" // Pass editMode state here
       >
         <h3>{ticket.title}</h3>
         <AvatarDisplay ticket={ticket} />

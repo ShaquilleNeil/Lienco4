@@ -1,3 +1,4 @@
+
 const ProgressDisplay = ({ progress }) => {
   return (
     <div className="progress-display">
