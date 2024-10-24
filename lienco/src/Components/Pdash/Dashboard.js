@@ -68,7 +68,9 @@ const Dashboard = () => {
                     color={colors[categoryIndex] || colors[0]}
                     ticket={filteredTicket}
                   />
+                  
                 ))}
+                <input type="submit" value="Submit" />
             </div>
           ))
         ) : (

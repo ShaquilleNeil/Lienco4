@@ -1,0 +1,109 @@
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8); /* Dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Content */
+.modal-content {
+  background: #0000006c; /* Black background */
+  color: #fff; /* White text */
+  padding: 50px;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
+  z-index: 1001;
+ 
+}
+
+/* Modal Heading */
+.modal-content h3 {
+  margin-top: 0;
+  border-bottom: 1px solid #c2cf0b; /* Border for title */
+  padding-bottom: 10px;
+  color: #c2cf0b; /* Yellow-green title text */
+}
+
+/* Textarea for update input */
+.modal-content textarea {
+  width: 20%;
+  height: 150px;
+  padding: 10px;
+  margin-right: 80px;
+  margin-bottom: 10px;
+  background: #333; /* Darker background for input field */
+  color: #fff; /* White text */
+  border: 1px solid #c2cf0b; /* Border for the textarea */
+  border-radius: 5px;
+}
+
+/* Buttons in the modal */
+.modal-content button {
+  margin-right: 10px;
+  background-color: #555; /* Darker button background */
+  color: #fff; /* White text */
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Updates section */
+/* Updates section */
+.update-item {
+  border: 2px solid #800080; /* Purple border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #333333; /* Charcoal grey background */
+  color: #fff; /* White text for updates */
+}
+
+.update-item h4 {
+  margin-top: 0;
+}
+
+.update-item p {
+  margin-bottom: 0;
+}
+
+.update-item small {
+  display: block;
+  margin-top: 5px;
+  color: #bbb; /* Lighter grey for the timestamp */
+}
+
+.comment-input {
+  width: 20%;
+  height: 10px;  /* Adjust the height */
+  padding: 5px;  /* Adjust padding to make it smaller */
+  font-size: 0.875rem;  /* Smaller font size */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;  /* Prevent resizing */
+}
+
+.comment-section button {
+  margin-top: 5px;
+  padding: 5px 10px;
+  font-size: 0.875rem;  /* Match button size to comment field */
+  border-radius: 5px;
+}
+
+.comment-section textarea {
+  width: 20%;
+  height: 10px;  /* Adjust the height */
+  padding: 5px;  /* Adjust padding to make it smaller */
+  font-size: 0.875rem;  /* Smaller font size */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;  /* Prevent resizing */
+}
