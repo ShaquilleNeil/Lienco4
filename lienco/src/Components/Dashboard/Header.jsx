@@ -5,6 +5,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 
 const Header = () => {
   const [userEmail, setUserEmail] = useState(null);
+  
 
   // Listen for changes in the authenticated user
   useEffect(() => {

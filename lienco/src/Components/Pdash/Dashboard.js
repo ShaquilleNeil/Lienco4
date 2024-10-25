@@ -70,7 +70,7 @@ const Dashboard = () => {
                   />
                   
                 ))}
-                <input type="submit" value="Submit" />
+                {/* <input type="submit" value="Submit" /> */}
             </div>
           ))
         ) : (
