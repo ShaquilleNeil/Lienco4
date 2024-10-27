@@ -3,7 +3,7 @@ import './SideBar.css';
 import { Link as RouterLink } from 'react-router-dom';
 import logo1 from '../Images/lienco3.png';
 
-const SideBar = () => {
+const SideBar = ({ userRole }) => { // Accept userRole as a prop
   return (
     <div className='sidenav'>
       <div className='sidenav-logo'>
@@ -15,21 +15,15 @@ const SideBar = () => {
           <RouterLink to="/">Home</RouterLink>
         </li>
         <li>
-          <RouterLink to="/about">About Us</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/assessment">Assessment</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/contact">Contact Us</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/pdash">Projects</RouterLink> {/* Capitalized "Projects" */}
+          <RouterLink to="/pdash">Projects</RouterLink>
         </li>
 
-        <li>
-          <RouterLink to="/ticket">Edit</RouterLink> {/* Capitalized "Projects" */}
-        </li>
+        {/* Conditionally render the "Edit" option for project managers */}
+        {userRole === 'project manager' && ( // Use && to conditionally render
+          <li>
+            <RouterLink to="/ticket">Edit</RouterLink>
+          </li>
+        )}
       </ul>
     </div>
   );

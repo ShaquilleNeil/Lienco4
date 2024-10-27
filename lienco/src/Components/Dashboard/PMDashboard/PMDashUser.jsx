@@ -4,7 +4,7 @@ import Header from '../Header.jsx'
 import Sidebar from '../SideBar.jsx'
 import im1 from '../../Images/projects.jpg';
 
-const DashUser = () => {
+const DashUser = ({onLogout, userRole}) => {
 
   // const cardData = [
   //   {
@@ -28,8 +28,8 @@ const DashUser = () => {
   // ];
   return (
     <div className='dashuser'>
-      <Header />
-      <Sidebar />
+      <Header onLogout={onLogout} />
+      <Sidebar userRole={userRole} />
 
      <div className='cards'>
       <figure>

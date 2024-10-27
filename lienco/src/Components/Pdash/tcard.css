@@ -108,3 +108,17 @@
   border-radius: 5px;
   resize: none;  /* Prevent resizing */
 }
+
+.add-update-section button {
+  padding: 5px 10px;
+  font-size: 0.875rem;  /* Match button size to comment field */
+  border-radius: 5px;
+  color: #000000;
+
+  background-color: #ffffff;
+  border: 1px solid #000000;  
+  cursor: pointer;
+  height: 123PX;
+  margin-bottom: 1px;
+  font-weight: bold;
+}

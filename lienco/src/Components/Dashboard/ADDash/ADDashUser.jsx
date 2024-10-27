@@ -5,7 +5,7 @@ import Header from '../Header.jsx';
 import Sidebar from '../SideBar.jsx';
 import ManageUserRoles from './ManageUserRoles'; // Import your role management component
 
-const DashUser = () => {
+const DashUser = ({ onLogout }) => {
 
   const [isAssessVisible, setIsAssessVisible] = useState(false);
   const aRef = useRef(null);
@@ -36,7 +36,7 @@ const DashUser = () => {
 
   return (
     <div className='addash'>
-      <Header />
+      <Header onLogout={onLogout}/>
       <Sidebar />
       
       {/* <div className='cards'>
