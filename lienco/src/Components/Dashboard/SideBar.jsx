@@ -3,7 +3,10 @@ import './SideBar.css';
 import { Link as RouterLink } from 'react-router-dom';
 import logo1 from '../Images/lienco3.png';
 
-const SideBar = ({ userRole }) => { // Accept userRole as a prop
+const SideBar = ({ userRole }) => {
+  // Set the dashboard route based on user role
+  const dashboardRoute = userRole === 'project manager' ? '/dashboard' : '/dashboard';
+
   return (
     <div className='sidenav'>
       <div className='sidenav-logo'>
@@ -11,22 +14,33 @@ const SideBar = ({ userRole }) => { // Accept userRole as a prop
       </div>
 
       <ul className='sidenav-menu'>
+        {/* Link to the main website */}
         <li>
-          <RouterLink to="/">Home</RouterLink>
+          <a href='/' className='lienco-link'>Lienco</a>
         </li>
+        
+        {/* Dynamic Home link based on user role */}
+        <li>
+          <RouterLink to={dashboardRoute}>Dashboard</RouterLink>
+        </li>
+        
         <li>
           <RouterLink to="/pdash">Projects</RouterLink>
         </li>
 
-        {/* Conditionally render the "Edit" option for project managers */}
-        {userRole === 'project manager' && ( // Use && to conditionally render
+        <li>
+          <RouterLink to="/resource-dashboard">Resources</RouterLink>
+        </li>
+
+        {/* Conditionally render "Add Project" for project managers */}
+        {userRole === 'project manager' && (
           <li>
-            <RouterLink to="/ticket">Edit</RouterLink>
+            <RouterLink to="/ticket">Add Project</RouterLink>
           </li>
         )}
       </ul>
     </div>
   );
-}
+};
 
 export default SideBar;

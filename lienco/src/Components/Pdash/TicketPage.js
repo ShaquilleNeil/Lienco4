@@ -6,6 +6,21 @@ import { collection, addDoc, doc, updateDoc, getDoc, getDocs } from 'firebase/fi
 import Header from '../Dashboard/Header.jsx';
 import Sidebar from '../Dashboard/SideBar.jsx';
 import './ticketpage.css';
+import { auth } from '../firebase'; // Ensure you import Firebase auth
+import { onAuthStateChanged } from 'firebase/auth'; // Import the auth state change listener
+
+const fetchUserRole = async (userId) => {
+  const roleDoc = await getDoc(doc(db, 'Roles', userId)); // Fetch role document using user ID
+  if (roleDoc.exists()) {
+    return roleDoc.data().role; // Return the role if document exists
+  } else {
+    console.log('No such document!');
+    return null; // Return null if no document found
+  }
+};
+
+
+
 
 const TicketPage = () => {
   const location = useLocation();
@@ -27,6 +42,7 @@ const TicketPage = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { id } = useParams();
+  const [userRole, setUserRole] = useState(null);
 
   // Function to fetch categories from Firestore
 // Function to fetch categories from Firestore
@@ -47,6 +63,30 @@ const fetchCategories = async () => {
     console.error('Error fetching categories:', error);
   }
 };
+
+const handleLogout = async () => {
+  try {
+    await auth.signOut(); // Sign out from Firebase
+    setUserRole(null); // Reset user role on logout
+    navigate('/'); 
+  } catch (error) {
+    console.error("Logout failed: ", error.message); // Log the error message
+  }
+};
+
+useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const role = await fetchUserRole(user.uid); // Fetch role on successful login
+      setUserRole(role);
+    } else {
+      setUserRole(null);
+    }
+    setLoading(false); // Set loading to false after fetching user role
+  });
+
+  return () => unsubscribe();
+}, []);
 
 
   const handleChange = (e) => {
@@ -101,8 +141,8 @@ const fetchCategories = async () => {
 
   return (
     <div className="ticket">
-      <Header />
-      <Sidebar />
+      <Header onLogout={handleLogout} />
+      <Sidebar userRole={userRole} />
       <h1>{editMode ? 'Update Your Ticket' : 'Create a Ticket'}</h1>
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}

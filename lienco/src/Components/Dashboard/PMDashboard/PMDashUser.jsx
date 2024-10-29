@@ -4,6 +4,7 @@ import Header from '../Header.jsx'
 import Sidebar from '../SideBar.jsx'
 import im1 from '../../Images/projects.jpg';
 
+
 const DashUser = ({onLogout, userRole}) => {
 
   // const cardData = [
@@ -31,7 +32,10 @@ const DashUser = ({onLogout, userRole}) => {
       <Header onLogout={onLogout} />
       <Sidebar userRole={userRole} />
 
+ 
+
      <div className='cards'>
+
       <figure>
     <img src="https://picsum.photos/id/287/250/300" alt="Mountains"/>
     <figcaption>The Day</figcaption>

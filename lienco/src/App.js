@@ -15,6 +15,7 @@ import { auth } from './Components/firebase'; // Import your firebase configurat
 import { onAuthStateChanged } from 'firebase/auth'; // Import for auth state
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from './Components/firebase'; // Adjust as per your setup
+import Resource from './Components/Resources/resourcepage';
 
 const fetchUserRole = async (uid) => {
   const docRef = doc(db, 'Roles', uid); // Assuming 'Roles' is your Firestore collection
@@ -89,6 +90,7 @@ function AppRoutes() {
         <Route path="/pdash" element={<Projects userRole={userRole} />} />
         <Route path="/ticket" element={<Tickets />} />
         <Route path="/ticket/:id" element={<Tickets editMode={true} />} />
+        <Route path="/resource-dashboard" element={<Resource />} />
         <Route 
           path="/dashboard" 
           element={
