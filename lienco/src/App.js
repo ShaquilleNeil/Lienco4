@@ -90,7 +90,7 @@ function AppRoutes() {
         <Route path="/pdash" element={<Projects userRole={userRole} />} />
         <Route path="/ticket" element={<Tickets />} />
         <Route path="/ticket/:id" element={<Tickets editMode={true} />} />
-        <Route path="/resource-dashboard" element={<Resource />} />
+        <Route path="/resource-dashboard" element={<Resource userRole={userRole} onLogout={handleLogout} />} />
         <Route 
           path="/dashboard" 
           element={
