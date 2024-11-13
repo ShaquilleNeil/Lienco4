@@ -59,7 +59,7 @@ const ResourcePage = ({ resourceData, userRole, onLogout }) => { // Accept userR
   return (
     <div className="resource-dashboard">
       <Header onLogout={onLogout} userRole={userRole}/>
-      <Sidebar className="sidebar" />
+      <Sidebar className="sidebar"  />
       <div className="resource-content">
         <div className="main-content">
           <BudgetTracker totalBudget={totalBudget} usedBudget={usedBudget} onBudgetChange={handleBudgetChange} />

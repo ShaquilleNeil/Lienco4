@@ -39,31 +39,30 @@ function App() {
 function AppRoutes() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState(null);
-  const [loading, setLoading] = useState(true); // Add loading state
-  const navigate = useNavigate(); // Create a navigate function
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        const role = await fetchUserRole(user.uid); // Fetch role on successful login
+        const role = await fetchUserRole(user.uid);
         setUserRole(role);
         setIsLoggedIn(true);
       } else {
         setIsLoggedIn(false);
         setUserRole(null);
       }
-      setLoading(false); // Set loading to false after fetching user role
+      setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
   const handleLogout = () => {
-    // Log out from Firebase
     auth.signOut().then(() => {
       setIsLoggedIn(false);
       setUserRole(null);
-      navigate('/'); // Redirect to the home page
+      navigate('/');
     }).catch((error) => {
       console.error("Logout error:", error);
     });
@@ -75,12 +74,14 @@ function AppRoutes() {
   };
 
   if (loading) {
-    return <div>Loading...</div>; // Optional loading indicator
+    return <div>Loading...</div>;
   }
 
   return (
     <div>
-      <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+      {/* Conditionally render Navbar */}
+      {window.location.pathname !== '/dashboard' && <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />}
+
       <Routes>
         <Route path="/" element={<Hero isLoggedIn={isLoggedIn} onLogin={handleLogin} />} />
         <Route path="/about" element={<About />} />
@@ -91,17 +92,17 @@ function AppRoutes() {
         <Route path="/ticket" element={<Tickets />} />
         <Route path="/ticket/:id" element={<Tickets editMode={true} />} />
         <Route path="/resource-dashboard" element={<Resource userRole={userRole} onLogout={handleLogout} />} />
-        <Route 
-          path="/dashboard" 
+        <Route
+          path="/dashboard"
           element={
             userRole === 'admin' ? (
-              <AdminDashboard onLogout={handleLogout}  />
+              <AdminDashboard onLogout={handleLogout} />
             ) : userRole === 'project manager' ? (
               <PMDashboard onLogout={handleLogout} userRole={userRole} />
             ) : (
               <Dashboard onLogout={handleLogout} />
             )
-          } 
+          }
         />
       </Routes>
     </div>

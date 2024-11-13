@@ -1,4 +1,3 @@
-// Dashboard.jsx
 import { useState, useEffect, useContext } from 'react';
 import { db } from '../firebase'; // Import your Firestore instance
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore'; // Import Firestore functions
@@ -32,52 +31,56 @@ const Dashboard = () => {
     try {
       await auth.signOut(); // Sign out from Firebase
       setUserRole(null); // Reset user role on logout
-      navigate('/'); 
+      navigate('/');
     } catch (error) {
       console.error("Logout failed: ", error.message); // Log the error message
     }
   };
 
-  useEffect(() => {
-    const fetchTickets = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, 'tickets')); // Fetch tickets from Firestore
-        const ticketsData = querySnapshot.docs.map((doc) => ({
-          documentId: doc.id,
-          ...doc.data(),
-        }));
+  const fetchTickets = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'tickets')); // Fetch tickets from Firestore
+      const ticketsData = querySnapshot.docs.map((doc) => ({
+        documentId: doc.id,
+        ...doc.data(),
+      }));
 
-        setTickets(ticketsData);
-      } catch (error) {
-        console.error('Error fetching tickets:', error);
-      } finally {
-        setLoading(false); // Set loading to false after fetching
-      }
-    };
+      // Get the logged-in user's email
+      const userEmail = auth.currentUser?.email;
 
-    fetchTickets();
-  }, []);
+      // Filter tickets based on the assignedToEmail field
+      const filteredTickets = ticketsData.filter(ticket => ticket.assignedUser === userEmail);
 
-  useEffect(() => {
-    if (tickets.length > 0) {
-      setCategories([...new Set(tickets.map(({ category }) => category))]);
+      setTickets(filteredTickets); // Set the filtered tickets to the state
+    } catch (error) {
+      console.error('Error fetching tickets:', error);
+    } finally {
+      setLoading(false); // Set loading to false after fetching
     }
-  }, [tickets, setCategories]);
+  };
 
-  // Fetch user role on auth state change
   useEffect(() => {
+    // Fetch user role and tickets on auth state change
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         const role = await fetchUserRole(user.uid); // Fetch role on successful login
         setUserRole(role);
+        fetchTickets(); // Fetch tickets for the logged-in user
       } else {
         setUserRole(null);
       }
-      setLoading(false); // Set loading to false after fetching user role
+      setLoading(false); // Set loading to false after checking user
     });
 
     return () => unsubscribe();
-  }, []);
+  }, []); // Empty dependency array ensures this runs only on mount
+
+  // useEffect to set categories once tickets are fetched
+  useEffect(() => {
+    if (tickets.length > 0) {
+      setCategories([...new Set(tickets.map(({ category }) => category))]); // Set categories once tickets are available
+    }
+  }, [tickets, setCategories]);
 
   const colors = [
     'rgb(255,179,186)',
