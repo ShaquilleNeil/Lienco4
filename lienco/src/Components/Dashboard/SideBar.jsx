@@ -1,32 +1,46 @@
-import React from 'react'
-import './SideBar.css'
-import { Link as RouterLink } from 'react-router-dom'
+import React from 'react';
+import './SideBar.css';
+import { Link as RouterLink } from 'react-router-dom';
 import logo1 from '../Images/lienco3.png';
-const SideBar = () => {
+
+const SideBar = ({ userRole }) => {
+  // Set the dashboard route based on user role
+  const dashboardRoute = userRole === 'project manager' ? '/dashboard' : '/dashboard';
+
   return (
     <div className='sidenav'>
-    <div className='sidenav-logo'>
-    <img src={logo1} alt='logo' />
+      <div className='sidenav-logo'>
+        <img src={logo1} alt='logo' />
+      </div>
+
+      <ul className='sidenav-menu'>
+        {/* Link to the main website */}
+        <li>
+          <a href='/' className='lienco-link'>Lienco</a>
+        </li>
+        
+        {/* Dynamic Home link based on user role */}
+        <li>
+          <RouterLink to={dashboardRoute}>Dashboard</RouterLink>
+        </li>
+        
+        <li>
+          <RouterLink to="/pdash">Projects</RouterLink>
+        </li>
+
+        <li>
+          <RouterLink to="/resource-dashboard">Resources</RouterLink>
+        </li>
+
+        {/* Conditionally render "Add Project" for project managers */}
+        {userRole === 'project manager' && (
+          <li>
+            <RouterLink to="/ticket">Add Project</RouterLink>
+          </li>
+        )}
+      </ul>
     </div>
+  );
+};
 
-    <ul className='sidenav-menu'>
-      <li>
-        <RouterLink to="/">Home</RouterLink>
-      </li>
-      <li>
-        <RouterLink to="/about">About Us</RouterLink>
-      </li>
-      <li>
-        <RouterLink to="/assessment">Assessment</RouterLink>
-      </li>
-      <li>
-        <RouterLink to="/contact">Contact Us</RouterLink>
-      </li>
-     
-   
-    </ul>
-  </div>
-  )
-}
-
-export default SideBar
+export default SideBar;

@@ -16,8 +16,8 @@ const Popup = ({ isVisible, onClose, onLogin }) => {
     setError(''); // Reset error state
 
     try {
-      await login(email, password); // Call your login function
-      onLogin();
+      const {user, role} =await login(email, password); // Call your login function
+      onLogin(role);
       onClose(); // Close the popup on successful login
     } catch (err) {
       setError(err.message); // Set error message

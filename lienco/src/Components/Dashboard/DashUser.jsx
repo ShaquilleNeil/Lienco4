@@ -5,7 +5,7 @@ import Sidebar from './SideBar.jsx'
 import Card from './Card.jsx';
 import im1 from '../Images/projects.jpg';
 
-const DashUser = () => {
+const DashUser = ({ onLogout }) => {
 
   const cardData = [
     {
@@ -29,8 +29,8 @@ const DashUser = () => {
   ];
   return (
     <div className='dashuser'>
-      <Header />
-      <Sidebar />
+      <Header onLogout={onLogout} />
+      <Sidebar  />
 
       {cardData.map((card) => (
         <Card key={card.id} title={card.title} description={card.description} imageUrl={card.imageUrl} />

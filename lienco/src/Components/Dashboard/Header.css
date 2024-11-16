@@ -64,3 +64,11 @@ input:hover{
     border-radius: 50px;
 }
 
+span{
+    margin-left: 10px;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
