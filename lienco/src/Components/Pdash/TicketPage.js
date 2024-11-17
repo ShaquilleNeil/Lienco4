@@ -122,22 +122,23 @@ const TicketPage = () => {
   
     try {
       const currentUser = auth.currentUser; // Get the current user
-      const assignedUserEmail = currentUser ? currentUser.email : ''; // Get email of the current user
+      const assignedUserEmail = formData.assignedUser; // Use the selected assigned user's email
   
-      // Add the assignedUserEmail to the form data
-      const formDataWithEmail = {
+      // Update form data to include the assignedUser's email as the category
+      const formDataWithCategory = {
         ...formData,
-        assignedUserEmail, // Include the email in the form data
+        category: assignedUserEmail, // Set the category to the assigned user's email
+        assignedUserEmail, // Also include the assignedUserEmail explicitly
       };
   
       if (editMode) {
         const ticketRef = doc(db, 'tickets', id);
-        await updateDoc(ticketRef, formDataWithEmail); // Update with the assignedUserEmail
+        await updateDoc(ticketRef, formDataWithCategory); // Update ticket
       } else {
-        await addDoc(collection(db, 'tickets'), formDataWithEmail); // Add with the assignedUserEmail
+        await addDoc(collection(db, 'tickets'), formDataWithCategory); // Create new ticket
       }
   
-      navigate('/pdash', { state: { refresh: true } });
+      navigate('/pdash', { state: { refresh: true } }); // Redirect after success
     } catch (error) {
       console.error('Submission failed:', error);
       setError(`Failed to submit the ticket: ${error.message}`);

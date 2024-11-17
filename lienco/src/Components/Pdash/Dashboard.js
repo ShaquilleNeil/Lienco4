@@ -37,20 +37,20 @@ const Dashboard = () => {
     }
   };
 
-  const fetchTickets = async () => {
+  const fetchTickets = async (userRole, userEmail) => {
     try {
-      const querySnapshot = await getDocs(collection(db, 'tickets')); // Fetch tickets from Firestore
+      const querySnapshot = await getDocs(collection(db, 'tickets')); // Fetch all tickets
       const ticketsData = querySnapshot.docs.map((doc) => ({
         documentId: doc.id,
         ...doc.data(),
       }));
-
-      // Get the logged-in user's email
-      const userEmail = auth.currentUser?.email;
-
-      // Filter tickets based on the assignedToEmail field
-      const filteredTickets = ticketsData.filter(ticket => ticket.assignedUser === userEmail);
-
+  
+      // Filter tickets based on user role
+      const filteredTickets =
+        userRole === 'project manager' || userRole === 'admin'
+          ? ticketsData // Project managers and admins see all tickets
+          : ticketsData.filter(ticket => ticket.assignedUser === userEmail); // Regular users see only their assigned tickets
+  
       setTickets(filteredTickets); // Set the filtered tickets to the state
     } catch (error) {
       console.error('Error fetching tickets:', error);
@@ -58,22 +58,23 @@ const Dashboard = () => {
       setLoading(false); // Set loading to false after fetching
     }
   };
+  
+ useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const role = await fetchUserRole(user.uid); // Fetch user role
+      setUserRole(role);
 
-  useEffect(() => {
-    // Fetch user role and tickets on auth state change
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const role = await fetchUserRole(user.uid); // Fetch role on successful login
-        setUserRole(role);
-        fetchTickets(); // Fetch tickets for the logged-in user
-      } else {
-        setUserRole(null);
-      }
-      setLoading(false); // Set loading to false after checking user
-    });
+      const userEmail = user.email; // Get user's email
+      fetchTickets(role, userEmail); // Pass role and email to fetchTickets
+    } else {
+      setUserRole(null);
+    }
+    setLoading(false); // Set loading to false after checking user
+  });
 
-    return () => unsubscribe();
-  }, []); // Empty dependency array ensures this runs only on mount
+  return () => unsubscribe();
+}, []); // Empty dependency array ensures this runs only on mount
 
   // useEffect to set categories once tickets are fetched
   useEffect(() => {
