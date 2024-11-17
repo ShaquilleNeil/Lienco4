@@ -53,11 +53,11 @@ useEffect(() => {
         <div className='line'></div>
         <h4>Construction excellence with a little extra.</h4><br />
         
-        <div className="btn">
+        <div className="btn-hero">
           {!isLoggedIn ? (
             <>
-              <button className='login color-1' onClick={togglePopup}><b>Log in</b></button>
-              <button className='signup color-2' onClick={toggleSign}><b>Sign up</b></button>
+              <button className='login-hero color-1' onClick={togglePopup}><b>Log in</b></button>
+              <button className='signup-hero color-2' onClick={toggleSign}><b>Sign up</b></button>
             </>
           ) : null} {/* Hide buttons if logged in */}
         </div>

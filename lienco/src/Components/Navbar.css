@@ -1,4 +1,4 @@
-.nav{
+.nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,71 +12,90 @@
     z-index: 2;
     position: fixed;
     width: 99vw;
-   
 }
 
-.nav-logo img{
+.nav-logo img {
     width: 100%;
     height: 100%;
 }
 
-.nav-logo{
+.nav-logo {
     padding-top: 50px;
     height: 120px;
     width: 120px;
 }
 
-.nav-menu{
+.nav-menu {
     list-style: none;
     align-items: center;
     display: flex;
     gap: 90px;
     font-size: 15px;
     font-weight: 700;
+    position: relative; /* For positioning the animation */
 }
 
-
-
-.nav-menu li{
+.nav-menu li {
     cursor: pointer;
+    position: relative; /* To allow positioning of the animated element */
 }
 
-
-.nav-menu li a{
+.nav-menu li a {
     text-decoration: none;
     color: white;
     font-size: 18px;
     transition: color 0.3s;
 }
 
-.nav-menu li a:hover{
-    border-bottom: 3px solid #fffb00;
-    
+.nav-menu li a:hover {
+    color: #fffb00; /* Change color on hover */
 }
 
-.nav-menu .active{
-   
+.nav-menu li a::before {
+    content: '';
+    position: absolute;
+    bottom: -5px; /* Position below the text */
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #fffb00; /* Yellow underline */
+    transform: scaleX(0); /* Start with no width */
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out; /* Smooth transition */
+}
+
+.nav-menu li a:hover::before {
+    transform: scaleX(1); /* On hover, expand the underline */
+    transform-origin: bottom left;
+}
+
+.nav-menu .active {
+    font-weight: bold;
+    color: blue;
     border-bottom: 3px solid #00c3ff;
 }
 
-.emergency{
+.emergency {
     background-color: rgb(255, 0, 0);
     padding: 10px 20px;
     border-radius: 50px;
     cursor: pointer;
 }
 
-.active {
-    font-weight: bold;
-    color: blue; 
-  }
-
-  .logout-button{
-    background-color: #36b8f4; /* Red background for logout button */
+.nav .logout-button {
+    background-color: #36b8f4; /* Blue background for logout button */
     color: white; /* Text color */
     border: none;
     padding: 10px 15px;
     border-radius: 5px; /* Rounded corners */
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
+}
+
+.nav .logout-button:hover {
+    background-color: #1eff00; /* Red background on hover */
+    color: #fff;
+    transform: translateY(-1px);
+    border: 0.5px solid #000000;
+}
+

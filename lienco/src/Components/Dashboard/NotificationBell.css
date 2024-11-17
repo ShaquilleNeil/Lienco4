@@ -1,6 +1,8 @@
 .notification-bell {
   position: relative;
   display: inline-block;
+  left: 30px;
+  bottom: 30px;
 }
 
 .bell-button {
@@ -30,16 +32,42 @@
   top: 40px;
   right: 100;
   width: 300px;
+  max-height: 400px;
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   z-index: 100;
+  overflow: auto;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Style the scrollbar itself */
+.notifications-modal::-webkit-scrollbar {
+  width: 8px; /* Set the width of the scrollbar */
+}
+
+/* Style the track (background) of the scrollbar */
+.notifications-modal::-webkit-scrollbar-track {
+  background: #333; /* Darker background */
+  border-radius: 10px;
+}
+
+/* Style the thumb (the draggable part of the scrollbar) */
+.notifications-modal::-webkit-scrollbar-thumb {
+  background: #d4af37; /* Gold color for the thumb */
+  border-radius: 10px;
+}
+
+/* Style the thumb on hover */
+.notifications-modal::-webkit-scrollbar-thumb:hover {
+  background: #a67c28; /* Darker gold on hover */
+}
 .notifications-modal h4 {
   margin-top: 0;
+
 }
 
 .notifications-modal ul {
@@ -50,10 +78,14 @@
 .notifications-modal li {
   border-bottom: 1px solid #ccc;
   padding: 10px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
 }
 
 .notifications-modal li p {
   margin: 0;
+  
 }
 
 .notifications-modal li small {

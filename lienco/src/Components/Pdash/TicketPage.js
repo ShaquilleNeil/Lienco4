@@ -123,12 +123,14 @@ const TicketPage = () => {
     try {
       const currentUser = auth.currentUser; // Get the current user
       const assignedUserEmail = formData.assignedUser; // Use the selected assigned user's email
+      const createdByEmail = currentUser.email; // Get the email of the person creating the ticket
   
-      // Update form data to include the assignedUser's email as the category
+      // Update form data to include the assignedUser's email as the category and the createdByEmail
       const formDataWithCategory = {
         ...formData,
         category: assignedUserEmail, // Set the category to the assigned user's email
         assignedUserEmail, // Also include the assignedUserEmail explicitly
+        createdByEmail, // Include the email of the person creating the ticket
       };
   
       if (editMode) {
@@ -146,6 +148,7 @@ const TicketPage = () => {
       setLoading(false);
     }
   };
+  
   
   // Fetch data for editing
   const fetchData = async () => {
