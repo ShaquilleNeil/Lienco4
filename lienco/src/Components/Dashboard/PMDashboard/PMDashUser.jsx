@@ -9,19 +9,49 @@ import BudgetTracker from '../../Resources/budgettracker.jsx';
 import MeetingScheduler from './meetingscheduler.jsx';
 import Chart from './chart.jsx'
 import Rchart from './rchart.jsx';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
-const DashUser = ({ onLogout, userRole, spentAmount, totalAmount,resourceData }) => {
+const DashUser = ({ onLogout, userRole, spentAmount, totalAmount,resourceData, events }) => {
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const auth = getAuth();
   const user = auth.currentUser;
   const navigate = useNavigate();  // Initialize useNavigate for navigation
-
+  const [meetings, setMeetings] = useState([]);
   const totalBudget = 50000; // Example total budget
   const usedBudget = 25000;  // Example used budget
   const percentageUsed = (usedBudget / totalBudget) * 100;
 
   const percentageSpent = (spentAmount / totalAmount) * 100;
+
+  const today = new Date();
+  const todayMeetings = meetings.filter((meeting) => {
+    const meetingDate = meeting.start; // `start` is already converted to a Date
+    return meetingDate.toDateString() === today.toDateString();
+  });
+  
+
+  const db = getFirestore();
+
+  function fetchMeetings(setMeetings) {
+    const meetingsRef = collection(db, "meetings");
+    getDocs(meetingsRef)
+      .then((querySnapshot) => {
+        const meetings = querySnapshot.docs.map((doc) => {
+          const data = doc.data();
+          return {
+            ...data,
+            start: new Date(data.start.seconds * 1000), // Convert Firestore Timestamp to Date
+          };
+        });
+        setMeetings(meetings);
+      })
+      .catch((error) => {
+        console.error("Error fetching meetings: ", error);
+      });
+  }
+  
+
 
   // Handle notification click to navigate to the ticket
   const handleNotificationClick = (ticketId) => {
@@ -29,6 +59,9 @@ const DashUser = ({ onLogout, userRole, spentAmount, totalAmount,resourceData })
   };
 
   useEffect(() => {
+
+    fetchMeetings(setMeetings);
+
     if (user) {
       const userEmail = user.email;
       if (userEmail) {
@@ -74,11 +107,12 @@ const DashUser = ({ onLogout, userRole, spentAmount, totalAmount,resourceData })
       <div className='dashcontent'>
         <div className='topbox'>
           <div className='topbox1'>
-  
+
 
           </div>
           <div className='topbox2'>
-            <h4>{unreadCount} unread notifications</h4>
+            <h4>Scheduled Meetings</h4>
+            <p className='counting'>{todayMeetings.length} meetings today</p>
           </div>
           <div className='topbox3'>
             <Rchart   title="Resource Usage"
