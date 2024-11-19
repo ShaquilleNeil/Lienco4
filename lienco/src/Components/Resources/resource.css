@@ -4,6 +4,7 @@
     width: 100vw; /* Full viewport width */
     display: flex;
     flex-direction: column; /* Stack header and content vertically */
+    overflow: hidden;
 }
 
 .resource-content {

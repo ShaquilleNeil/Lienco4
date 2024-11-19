@@ -9,7 +9,7 @@ const About = () => {
     <div className='about'>
         <div className='aboutcontent'>
         <div className='image-side'>
-              <img src={im} alt='side' />
+              <img className='image' src={im} alt='side' />
             </div>
             <div className='info-side'>
               <div className='sub1'><h1>Crafting Quality: The Lienco Constructions Promise</h1></div>

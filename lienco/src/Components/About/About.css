@@ -102,7 +102,7 @@
     animation: slideDown 0.5s forwards; /* Apply animation */
 }
 
-.image-side img {
+.image-side .image {
     width: 100%;
     height: auto;
     border-radius: 10px;
@@ -180,7 +180,7 @@
     overflow: hidden;
 }
 
-img {
+.image {
     flex-shrink: 0;
     min-width: 100%;
     min-height: 100%;

@@ -44,20 +44,14 @@
 .signpop-content form input[type="email"],
 .signpop-content form input[type="password"],
 .signpop-content form input[type="text"] {
-    display: block;
-    width: 300px;
-    height: 10px;
-    margin-bottom: 10px;
-    border: none;
-    outline: none;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    background-color: rgb(255, 255, 255);
-    color: #333;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-    margin-top: 20px;
-    margin-bottom: 20px;
+  background: #ecf0f3;
+  padding: 10px;
+  padding-left: 20px;
+  height: 30px;
+  width: 90%;
+  font-size: 14px;
+  border-radius: 50px;
+  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
 }
 
 .signpop-content form label {

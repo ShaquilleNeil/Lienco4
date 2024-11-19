@@ -181,7 +181,7 @@ const TicketPage = () => {
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <div className="ticket-container">
-        <form onSubmit={handleSubmit}>
+        <form className="ticket-form" onSubmit={handleSubmit}>
           <section>
             <label htmlFor="title">Title</label>
             <input
@@ -306,7 +306,7 @@ const TicketPage = () => {
               onChange={handleChange}
             />
             <div className="avatar-preview">
-              {formData.avatar && <img src={formData.avatar} alt="Avatar" />}
+              {formData.avatar && <img className="avatar" src={formData.avatar} alt="Avatar" />}
             </div>
           </section>
         </form>

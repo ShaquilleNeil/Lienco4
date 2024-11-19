@@ -1,0 +1,156 @@
+/* General Calendar Container */
+.rbc-calendar {
+    font-family: Arial, sans-serif;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 5px;
+    height: 20%;
+ 
+  }
+  
+  .bigcal{
+    background-color: #0080ff;
+    border: none;
+    color: #000000;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    display: flex;
+  }
+
+  .cal{
+   align-items: center;
+   justify-content: center;
+   display: column;
+   
+  }
+
+  .email-dropdown {
+    padding: 8px;
+    margin: 10px 0;
+    width:205px;
+   height: 45px;
+  }
+  
+  
+  /* Header Styling */
+  .rbc-toolbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+ .calb {
+    background-color: #007bff;
+    border: none;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+.calb:hover {
+    background-color: #0056b3;
+    color: white;
+  }
+  
+  .rbc-toolbar-label {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  
+  /* Day and Time Grid */
+  .rbc-time-view .rbc-time-header {
+    background-color: #f8f9fa;
+  }
+  
+  .rbc-header {
+    text-align: center;
+    padding: 5px 0;
+    background-color: #e9ecef;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .rbc-header + .rbc-header {
+    border-left: 1px solid #ddd;
+  }
+  
+  .rbc-time-view .rbc-allday-cell {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .rbc-time-column {
+    border-left: 1px solid #ddd;
+  }
+  
+  .rbc-day-bg {
+    background-color: #fdfdfd;
+  }
+  
+  .rbc-day-bg:hover {
+    background-color: #e9ecef;
+  }
+  
+  /* Event Styling */
+  .rbc-event {
+    background-color: #007bff;
+    border-radius: 4px;
+    color: white;
+    padding: 2px 5px;
+    font-size: 0.85em;
+    cursor: pointer;
+  }
+  
+  .rbc-event:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Today Highlight */
+  .rbc-today {
+    background-color: #fffbeb !important;
+    border: 1px solid #ffd700;
+  }
+  
+  /* Selected Slot */
+  .rbc-selected-cell {
+    background-color: #d1ecf1 !important;
+    border: 1px solid #bee5eb !important;
+  }
+  
+  /* Month View */
+  .rbc-month-view {
+    border-spacing: 0;
+  }
+  
+  .rbc-month-row {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .rbc-month-row:last-child {
+    border-bottom: none;
+  }
+  
+  .rbc-month-view .rbc-row-segment {
+    margin: 2px 0;
+  }
+  
+  /* Time Slots */
+  .rbc-time-slot {
+    border-top: 1px solid #f1f1f1;
+  }
+  
+  /* Scrollbars */
+  .rbc-time-content {
+    overflow-y: auto;
+    height: calc(100vh - 300px); /* Adjust based on your layout */
+  }
+  
+  .cal{
+    color: white;
+  }

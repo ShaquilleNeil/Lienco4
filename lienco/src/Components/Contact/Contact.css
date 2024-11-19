@@ -47,19 +47,14 @@
 .contact-form input[type="text"],
 .contact-form input[type="email"],
 .contact-form textarea {
-    width: 90%;
-    height: 50px;
-    background: #ffffff;
-    border: 2px solid #000000;
-    outline: none;
-    border-radius: 5px;
-    color: #000000;
-    padding: 5px 10px;
-    margin: 15px 0;
-    font-size: 18px;
-    letter-spacing: 1px;
-    margin-left: 5px;
-    transition: all 0.3s ease;
+    background: #ecf0f3;
+  padding: 10px;
+  padding-left: 20px;
+  height: 50px;
+  width: 90%;
+  font-size: 14px;
+  border-radius: 50px;
+  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
 }
 
 .contact-form input[type="text"]:focus,
@@ -69,18 +64,13 @@
 }
 
 .contact-form textarea {
-    width: 90%;
+    background: #ecf0f3;
+    padding: 10px;
+    padding-left: 20px;
     height: 200px;
-    background: #ffffff;
-    border: 2px solid #000000;
-    outline: none;
-    border-radius: 5px;
-    color: #000000;
-    padding: 5px 10px;
-    margin: 15px 0;
-    font-size: 18px;
-    letter-spacing: 1px;
-    margin-left: 5px;
+    font-size: 14px;
+    border-radius: 40px;
+    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
 }
 
 /* .contact-form input[type="text"]:focus,
@@ -128,6 +118,7 @@
     transition: all 0.3s ease 0s;
     cursor: pointer;
     outline: none;
+    margin-top: 10px;
 }
 
 .contact-form button:hover {
