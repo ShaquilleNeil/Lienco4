@@ -3,9 +3,10 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { db } from '../../firebase';  // Import your Firebase config
-import { collection, getDocs, addDoc } from 'firebase/firestore'; // Import Firestore methods
+import { collection, getDocs, addDoc, getFirestore, doc, getDoc } from 'firebase/firestore'; // Import Firestore methods
 import './meeting.css';
 import { Timestamp } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 
 const localizer = momentLocalizer(moment); // Initialize the localizer
 
@@ -33,10 +34,24 @@ const MeetingScheduler = ({ onMeetingScheduled }) => {
 
   // Fetch events from Firestore to display on page load
 // Fetch events from Firestore to display on page load
+
+
+
+
 const fetchEvents = async () => {
-    try {
-      const eventCollectionRef = collection(db, 'meetings'); // Store meetings in 'meetings' collection
-      const eventSnapshot = await getDocs(eventCollectionRef);
+  try {
+    const db = getFirestore(); // Initialize Firestore
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user) {
+      // Fetch the user's role from Firestore
+      const userDocRef = doc(db, 'Roles', user.uid); // Assuming 'Roles' collection uses user UID as document ID
+      const userDoc = await getDoc(userDocRef);
+      const userRole = userDoc.exists() ? userDoc.data().role : null;
+
+      const meetingsRef = collection(db, 'meetings'); // Store meetings in 'meetings' collection
+      const eventSnapshot = await getDocs(meetingsRef);
       const eventList = eventSnapshot.docs.map(doc => {
         const data = doc.data();
         return {
@@ -47,13 +62,29 @@ const fetchEvents = async () => {
           userEmail: data.userEmail,
         };
       });
-      console.log("Fetched Events from Firestore:", eventList); // Debugging line
-      setEvents(eventList);
-    } catch (err) {
-      console.error('Error fetching events:', err);
+
+      // Filtering logic based on user role
+      let filteredEvents;
+      if (userRole === 'project manager') {
+        // Show all events for project manager
+        filteredEvents = eventList;
+      } else {
+        // Show only events that belong to the logged-in user
+        filteredEvents = eventList.filter(event => event.userEmail === user.email);
+      }
+      
+      console.log("Fetched Events from Firestore:", filteredEvents); // Debugging line
+      setEvents(filteredEvents);
+
+    } else {
+      console.error("No user is currently signed in.");
     }
-  };
-  
+  } catch (err) {
+    console.error('Error fetching events:', err);
+  }
+};
+
+
   // Fetch events when the component mounts
   useEffect(() => {
     fetchUsers(); // Fetch users when the component mounts

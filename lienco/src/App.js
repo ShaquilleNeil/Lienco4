@@ -80,7 +80,8 @@ function AppRoutes() {
   return (
     <div>
       {/* Conditionally render Navbar */}
-      {window.location.pathname !== '/dashboard' && <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />}
+      {(window.location.pathname !== '/dashboard' && window.location.pathname !== '/pdash' && window.location.pathname !== '/resource-dashboard' && window.location.pathname !== '/ticket') && <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />}
+
 
       <Routes>
         <Route path="/" element={<Hero isLoggedIn={isLoggedIn} onLogin={handleLogin} />} />
