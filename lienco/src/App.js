@@ -16,6 +16,8 @@ import { onAuthStateChanged } from 'firebase/auth'; // Import for auth state
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from './Components/firebase'; // Adjust as per your setup
 import Resource from './Components/Resources/resourcepage';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const fetchUserRole = async (uid) => {
   const docRef = doc(db, 'Roles', uid); // Assuming 'Roles' is your Firestore collection

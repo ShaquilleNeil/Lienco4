@@ -1,177 +1,341 @@
-
-.addash {
-    background-image: linear-gradient(90deg, #000000,#2C272E);
- height: 100vh;
- width: 100vw;
- display: flex;
- justify-content: center;
- align-items: center;
-}
-
-/* .cards{display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border-radius: 1rem;
-    overflow: hidden;
-    cursor: pointer;
-    gap: 1rem;}
-
-
-figure {
-    display: grid;
-    border-radius: 1rem;
-    overflow: hidden;
-    cursor: pointer;
-  }
-  figure > * {
-    grid-area: 1/1;
-    transition: .4s;
-  }
-  figure figcaption {
-    display: grid;
-    align-items: end;
-    font-family: sans-serif;
-    font-size: 2.3rem;
-    font-weight: bold;
-    color: #0000;
-    padding: .75rem;
-    background: var(--c,#0009);
-    clip-path: inset(0 var(--_i,100%) 0 0);
-    -webkit-mask:
-      linear-gradient(#000 0 0),
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    -webkit-mask-clip: text, padding-box;
-    margin: -1px;
-  }
-  figure:hover figcaption{
-    --_i: 0%;
-  }
-  figure:hover img {
-    transform: scale(1.2);
-  }
-  @supports not (-webkit-mask-clip: text) {
-    figure figcaption {
-     -webkit-mask: none;
-     color: #fff;
-    }
-  } */
-
-  
-.containeradd{
+.addashuser {
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
- /* flex-direction: row; */
-  margin-bottom: 50px;
-  margin-left: -500px;
-  margin-right: 400px;
-  height: 100vh;
-  width: 100vw;
-  background:  linear-gradient(rgb(255, 0, 0), rgb(255, 0, 0));
+  flex-direction: column;
+  height: 100vh; /* Full viewport height */
+  background-image: url('../../Images/5630939.jpg');
   background-size: cover;
-  gap: 3px;
+  overflow: auto;
+
 }
 
-.container1add, .container2add {
+
+.addashcontent {
+  display: flex;
+  flex: 1; /* Expands to fill available space */
+  gap: 20px; /* Reduced space between dashtainer1 and the right stack */
+  flex-direction: column;
+  margin-top: -250px; /* Reduced margin to bring everything up */
+  height: 90vh; /* Reduced height to allow more content on screen */
+}
+
+.adleftside {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  width: 85%; /* Reduced width for better fitting */
+  margin-top: -60px;
+  justify-content: space-between;
+  gap: 10px;
+  margin-left: 130px; /* Reduced margin for better positioning */
+}
+
+.addashtainer1 {
+
+  height: 455px; /* Adjust height to fit content */
+  margin-right: 10px; /* Space between dashtainer1 and the right stack */
+  border-radius: 50px;
+  width: 450px;
+  margin-top: 40px;
+  color: white;
+  padding: 20px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5.5px);
+  border-radius: 10px;
+  -webkit-backdrop-filter: 5.5px;
+  background: rgba(53, 53, 53, 0.25);
+  overflow: auto;
+  border: 1px solid rgba(0, 204, 255, 0.397);
+  justify-content: center;
+  align-items: center;
+  margin-left: 100px;
+  animation: slideLeft 0.5s ease;
+  text-decoration: none;
+  overflow: auto;
+  animation: slideDown 0.5s ease;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* background: url('../../Images/cardimgfree.webp') 50% center / cover border-box; */
+ 
+  background-position: 50% center;
+ 
+
+}
+
+.adtopbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
+  background-color: wheat;
+  margin-top: 300px;
+margin-bottom: 1px;
+text-decoration: none;
+margin-left: 200px;
+border-radius: 40px;
+padding: 20px;
+background-color: transparent;
+animation: slideDown 0.5s ease;
+width: 85vw;
+}
+
+.adtopbox2 .adcounting{
+  color: white;
+  align-items: center;
+  flex-direction: column;
+  font-size: 30px;
+  padding: 10px;
+  
+}
+
+.adtopbox2{   display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.589);
+  margin-top: 20px; /* Adjust the spacing between each topbox component */
+  font-size: 5px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+   border-radius: 10px;
+   background: url('../../Images/cardimgfree.webp') 50% center / cover border-box;
+   border: 1px solid rgba(0, 204, 255, 0.397);
+   cursor: pointer;
+   overflow: hidden;
+   position: relative;
+
+}
+
+.adtopbox2 h4{
+
+  position: relative;
+  z-index: 10; /* Ensures the label is above the SVG background */
+  color: #bfdbfe; /* Equivalent to Tailwind's text-blue-200 */
+  font-weight: 600; /* Equivalent to Tailwind's font-semibold */
+  font-size: 20px; /* Adjust for desired size */
+  line-height: 1; /* Equivalent to leading-none */
+  padding: 10px; /* Optional: spacing */
+}
+
+
+.adtopbox1{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.589);
+  gap: 20px;
+  margin-top: 20px; /* Adjust the spacing between each topbox component */
+  font-size: 5px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+   border-radius: 10px;
+   background: url('../../Images/cardimgfree.webp') 50% center / cover border-box;
+   border: 1px solid rgba(0, 204, 255, 0.397);
+   cursor: pointer;
+   overflow: hidden;
+   position: relative;
+}
+
+.adtopbox4{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.589);
+  gap: 20px;
+  margin-top: 20px; /* Adjust the spacing between each topbox component */
+  font-size: 5px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+   border-radius: 10px;
+   background: url('../../Images/cardimgfree.webp') 50% center / cover border-box;
+   border: 1px solid rgba(0, 204, 255, 0.397);
+   cursor: pointer;
+   overflow: hidden;
+   position: relative;
+}
+
+.adtopbox4::after {
+  content: ""; /* Adds the decorative SVG */
+  position: relative;
+  right: -32px; /* Adjust to move it outside the container */
+  bottom: -32px;
+  width: 128px; /* Equivalent to Tailwind's h-32 w-32 */
+  height: 128px;
+  background: url('data:image/svg+xml;charset=UTF-8,%3Csvg fill%3D%22none%22 viewBox%3D%220 0 24 24%22 stroke%3D%22%23bfdbfe%22 xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Cpath stroke-linecap%3D%22round%22 stroke-linejoin%3D%22round%22 stroke-width%3D%222%22 d%3D%22M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z%22/%3E%3C/svg%3E') no-repeat center;
+  background-size: contain;
+  opacity: 0.5; /* Semi-transparent */
+  z-index: 0; /* Ensures it is behind the text */
+
+}
+
+.adtopbox3 {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.589);
+  gap: 20px;
+  margin-top: 20px; /* Adjust the spacing between each topbox component */
+  font-size: 5px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+   border-radius: 10px;
+   background: url('../../Images/cardimgfree.webp') 50% center / cover border-box;;
+   border: 1px solid rgba(0, 204, 255, 0.397);
+   cursor: pointer;
+   overflow: hidden;
+   position: relative;
+}
+
+.adtopbox1 h4,.adtopbox3 h4, .adtopbox4  h4 {
+  position: relative;
+  z-index: 10; /* Ensures the label is above the SVG background */
+  color: #bfdbfe; /* Equivalent to Tailwind's text-blue-200 */
+  font-weight: 600; /* Equivalent to Tailwind's font-semibold */
+  font-size: 20px; /* Adjust for desired size */
+  line-height: 1; /* Equivalent to leading-none */
+  padding: 10px; /* Optional: spacing */
+ justify-content: center;
+}
+.addashtainer1::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar width */
+}
+
+.addashtainer1 li{
+  list-style: none;
+  border: 2px solid rgba(255, 255, 255, 0);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.8);
+  text-decoration: none;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.addashtainer1 li:hover{
+  border: 2px solid rgba(255, 255, 255, 0.5);
   cursor: pointer;
-  position: relative;
-  margin-bottom: 1rem;
-  padding: 1rem; /* Add padding for better spacing */
-  border-radius: 8px; /* Match the card's border-radius */
-  background: linear-gradient(0deg, rgba(40,44,52,1) 0%, rgba(161, 161, 161, 0.5) 100%);
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
-  width: 400px;
-  height: 300px;
-  /* background-image: url('./af1.jpg') ; */
+}
 
+.addashtainer1 li p{
+  color: white;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 400;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   text-decoration: none;
+}
+
+.addashtainer1 h4{
+  text-align: center;
+  font-size: 30px;
+  font-weight: 500;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 
 
-.container1add:hover,
-.container2add:hover{
-  border: 1px solid #ffffff44;
-  box-shadow: 0 7px 50px 10px #000000aa;
-  transform: scale(1.100);
-  filter: brightness(1.3);
-
+.addashtainer3 {
+  height: 400px; /* Fixed height for consistent stacking */
+  min-height: 340px;
+  border-radius: 50px;
+  width: 80vw;
+   animation: slideUp 0.5s ease;
+   margin-top: -20px;
+   color: rgba(255, 255, 255, 0.87);
+   display: flex;
+   flex-direction: column;
+   position: relative;
+   box-shadow: rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem;
+   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+   overflow: hidden;
+   background: url('../../Images/cardimgfree.webp') 50% center / cover border-box;
+   padding: 2px;
+   border-style: solid;
+   border-color: rgba(0, 0, 0, 0.125);
+   border-image: initial;
+   border-radius: 1.25rem;
+   background-position: 50% center;
+   margin-left: 210px;
+   
 }
 
-.container1add::before, .container2add::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
-  z-index: 1; /* Below text but above image */
+.adreact-big-calendar {
+  width: 100%;  /* Make it take full width of the container */
+  height: 80vh;  /* Adjust the height as needed (80% of the viewport height) */
+  margin: 0 auto;
+  border: 1px solid #ccc; /* Optional: Add a border around the calendar */
+  border-radius: 8px;
 }
 
-.container1add:hover::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+.addashtainer2{
+  margin-top: 60px;
+  height: 200px; /* Fixed height for consistent stacking */
+  border-radius: 50px;
+  width: 50vw;
+  height: 80%;
+   animation: slideDown 0.5s ease;
+   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+   /* background: url('../../Images/cardimgfree.webp') 50% center / cover border-box; */
+   background-position: 50% center;
+   padding-bottom: 10px;
+   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+   backdrop-filter: blur(5.5px);
+   border-radius: 10px;
+   -webkit-backdrop-filter: 5.5px;
+   background: rgba(49, 49, 49, 0.25);
+   border: 1px solid rgba(0, 204, 255, 0.397);
+ }
+
+.adbudgettracker{
+  width: 50vw;
+  max-width: 2000px; 
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
-
-
-
-.container1add h2, .container2add h2{
-  position: relative;
-  bottom: 0;
-  height: 300px;
-  color: #fff;
-  font-size: 80px;
-  font-family: Oswald;
-  text-transform: uppercase;
-  z-index: 2;
-  transition: all 500ms ease-in-out;
+@keyframes slideUp {
+  from {
+      transform: translateY(500px);
+      opacity: 0;
+  }
+  to {
+      transform: translateY(0);
+      opacity: 1;
+  }
 }
 
-.container1add:hover h2 {
-  left: 300px;
-  transform: scale(.5);
+@keyframes slideDown {
+  from {
+      transform: translateY(-500px);
+      opacity: 0;
+  }
+  to {
+      transform: translateY(0);
+      opacity: 1;
+  }
 }
 
-
-.container2add:hover h2 {
-  left: 300px;
-  transform: scale(.5);
-  
-}
-
-.container2add {
-  
-  /* background-image: url('./OIP.jpg'); */
-}
-
-
-
-.container1add h2.click,
-.container2add h2.click {
-  position: absolute; /* Position it absolutely within the container */
-  bottom: -40%; /* Adjust as necessary to center it vertically */
-  left: 55%;
-  transform: translate(-50%, 0); /* Center it horizontally */
-  color: #fff;
-  font-size: 40px; /* Adjust size as needed */
-  opacity: 0; /* Start hidden */
-  transition: opacity 0.3s ease; /* Smooth transition */
-  z-index: 2; /* Ensure it appears above the overlay */
-}
-
-.container1add:hover h2.click,
-.container2add:hover h2.click {
-  opacity: 1; /* Show on hover */
+@keyframes slideLeft {
+  from {
+      transform: translateX(-100%);
+      opacity: 0;
+  }
+  to {
+      transform: translateX(0);
+      opacity: 1;
+  }
 }
 
 
-/* Overlay style */
+
 .overlay {
   position: fixed; 
   top: 0;
@@ -185,7 +349,7 @@ figure {
   z-index: 9999; 
 }
 
-/* Form container style */
+
 .form-container {
   background-color: #ffffff;
   padding: 20px;
@@ -196,7 +360,7 @@ figure {
   position: relative;
 }
 
-/* Close button */
+
 .close-btn {
   position: absolute;
   top: 10px;
@@ -208,7 +372,7 @@ figure {
   color: #000;
 }
 
-/* Success and error messages */
+
 .success-message {
   color: green;
 }

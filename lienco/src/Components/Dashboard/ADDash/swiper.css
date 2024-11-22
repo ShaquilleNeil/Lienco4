@@ -1,0 +1,40 @@
+/* YourComponent.css */
+.carousel-container {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+.card {
+  background-color: #fcfcfc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 10px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  margin: 0 10px; /* Add horizontal space between cards */
+  height: 300px;
+  width: 100px;
+
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-link {
+  text-decoration: none;
+  color: #333;
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #666;
+}
