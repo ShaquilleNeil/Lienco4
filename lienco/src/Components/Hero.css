@@ -176,3 +176,23 @@ h4 {
     transform: translateY(-7px);
     border: 0.5px solid #000000;
 }
+
+@media (max-width: 968px) {
+    .hero {
+        height: auto; /* Avoid 100vh on smaller screens */
+    }
+
+    .hero .content {
+        width: 90%; /* Make the content width more flexible on small screens */
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 36px; /* Adjust title size for mobile */
+        padding-bottom: 20px;
+    }
+
+    .btn-hero {
+        flex-direction: column; /* Stack the buttons vertically on mobile */
+    }
+}

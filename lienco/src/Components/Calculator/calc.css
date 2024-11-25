@@ -1,91 +1,152 @@
-/* Overlay style */
+/* Main overlay */
 .coverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgb(255, 255, 255); /* Semi-transparent black */
-    z-index: -1; /* Ensure it's above content but below the modal */
-    display: none; /* Hidden by default */
-  }
-  
-  /* When the modal is visible */
-  .modal-container .overlay {
-    display: block; /* Show the overlay when the modal is open */
-   
-  }
-  
- 
-  /* Modal style */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  opacity: 1.0;
+}
+
+/* Modal */
+.modal {
+  position: relative;
+  width: 500px;
+  background: rgba(0, 0, 0, 0.842);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 7px 7px 30px rgba(255, 255, 255, 0.5);
+  z-index: 2;
+  max-width: 90%;
+  margin: 0 auto;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  position: absolute;
+}
+
+/* Title */
+.modal h1 {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+/* Form input styling */
+.modal input,
+.modal select {
+  background: #ecf0f3;
+  padding: 10px 20px;
+  height: 40px;
+  width: 90%;
+  font-size: 14px;
+  border-radius: 10px;
+  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+  margin-bottom: 15px;
+}
+
+.modal textarea {
+  background: #ecf0f3;
+  padding: 10px 20px;
+  width: 90%;
+  height: 200px;
+  font-size: 14px;
+  border-radius: 10px;
+  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+}
+
+/* Label styling */
+.modal label {
+  color: #fff;
+  font-size: 18px;
+  letter-spacing: 1px;
+  margin-left: 15px;
+}
+
+/* Error message */
+.error-message {
+  color: red;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Calculate button */
+.modal button {
+  width: 100%;
+  height: 45px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #000;
+  background-color: #00a2ff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  margin-top: 20px;
+}
+
+.modal button:hover {
+  background-color: #d4af37;
+  box-shadow: 0px 15px 20px #d4af37b7;
+  color: #fff;
+  transform: translateY(-7px);
+  border: 0.5px solid #000000;
+}
+
+/* Close button */
+.modal button:last-child {
+  background-color: #ff4d4d;
+  margin-top: 10px;
+}
+
+.modal button:last-child:hover {
+  background-color: #e63946;
+}
+
+/* Mobile Adaptation */
+@media (max-width: 768px) {
   .modal {
-    position: fixed;
+    width: 70%;
+    height: auto;
+    padding: 15px;
+    transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgb(255, 255, 255);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 10; /* Modal above the overlay */
-    width: 80%;
-    max-width: 500px;
-    box-sizing: border-box;
+    position: absolute;
   }
-  
-  /* Modal Header */
+
+  .modal input,
+  .modal select,
+  .modal textarea {
+    width: 85%;
+  }
+
+  .modal select{
+    width: 98%;
+  }
   .modal h1 {
     font-size: 24px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
-  
-  /* Form input styles */
+
   .modal label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
+    font-size: 16px;
   }
-  
-  .modal input,
-  .modal select {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 16px;
-    border: 1px solid #000000;
-    border-radius: 4px;
-  }
-  
-  /* Button Styles */
+
   .modal button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .modal button:hover {
-    background-color: #0056b3;
-  }
-  
-  .error-message {
-    color: red;
     font-size: 14px;
-    margin-top: 10px;
   }
-  
-  /* Close Button Style */
-  .modal .close-btn {
-    background-color: #dc3545;
-    margin-top: 10px;
+
+  .error-message {
+    font-size: 14px;
   }
-  
-  .modal .close-btn:hover {
-    background-color: #c82333;
-  }
-  
-  .modal h2 {
-    color: #000000;
-  }
+}

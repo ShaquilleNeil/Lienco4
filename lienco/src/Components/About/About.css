@@ -259,27 +259,52 @@
 }
 
 /* Media Queries for responsiveness */
-@media (max-width: 768px) {
+@media (max-width: 508px) {
     .aboutcontent {
         flex-direction: column; 
+        padding: 20px; /* Add padding for spacing */
+        overflow: auto;
+    }
+
+    .about {
+        height: 100vh; /* Remove fixed height */
     }
 
     .image-side {
+        margin-top: 100px;
         width: 100%;
         top: -30px; /* Adjust positioning */
     }
 
     .info-side {
+        margin-top: 800px;
         padding: 20px; 
         margin-left: 0; /* Remove left margin */
-        margin-top: 20px; /* Add margin for spacing */
+        height: 100vh;
     }
 
     h1 {
         font-size: 1.8rem; 
     }
 
+    .info-side p {
+        padding-left: 0;
+        font-size: 14px;
+    }
+
     .contact-button {
         width: 100%; 
+        margin-top: 20px;
+    }
+
+    .info-side button {
+        width: 100%;
+        height: 50px;
+        font-size: 14px;
+    }
+
+    .image-side .image {
+        width: 100%;
+        height: auto;
     }
 }
