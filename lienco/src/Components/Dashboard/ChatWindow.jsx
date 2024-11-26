@@ -136,6 +136,7 @@ const ChatWindow = () => {
         <option value="">Who do you want to speak to?</option>
         <option value="admin">Admin</option>
         <option value="project manager">Project Manager</option>
+        <option value="user">Client</option>
       </select>
 
       {/* Log users to check if they are fetched */}
@@ -180,7 +181,7 @@ const ChatWindow = () => {
           value={selectedUser}
           style={{ width: "100%", marginBottom: "10px" }}
         >
-          <option value="">Select Client</option>
+          <option value="user">Select Client</option>
           {/* Render the clients here if needed */}
         </select>
       )}
@@ -196,7 +197,7 @@ const ChatWindow = () => {
           marginBottom: "10px",
         }}
       >
-        {messages.slice(0).reverse().map((msg) => (
+        {messages.slice(0).map((msg) => (
           <div key={msg.id} style={{ marginBottom: "8px" }}>
             <strong>{msg.sender}: </strong>
             {msg.message}
