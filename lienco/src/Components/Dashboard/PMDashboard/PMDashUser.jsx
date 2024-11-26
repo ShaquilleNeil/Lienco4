@@ -10,6 +10,7 @@ import MeetingScheduler from './meetingscheduler.jsx';
 import Chart from './chart.jsx'
 import Rchart from './rchart.jsx';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import ChatBubble from '../ChatBubble.jsx';
 
 const DashUser = ({ onLogout, userRole, spentAmount, totalAmount,resourceData, events }) => {
   const [notifications, setNotifications] = useState([]);
@@ -155,13 +156,9 @@ const DashUser = ({ onLogout, userRole, spentAmount, totalAmount,resourceData, e
         </div>
        
 
-        <div className='rghtside'>
-         
-          <div className='dashtainer3'>
-           
-          </div>
-        </div>
+       
       </div>
+      <ChatBubble />
     </div>
   );
 };

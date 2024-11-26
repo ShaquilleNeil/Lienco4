@@ -177,11 +177,7 @@ const ADDashUser = ({ onLogout, userRole, events }) => {
        
 
   
-         
-          <div className='addashtainer3'>
-           
-           <Carousel />
-          </div>
+        
      
         {isAssessVisible && ( // Conditional rendering
            <div className="overlay">

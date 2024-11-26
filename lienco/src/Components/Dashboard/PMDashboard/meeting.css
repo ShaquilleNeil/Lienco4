@@ -11,7 +11,7 @@
   }
   
   .bigcal{
-    background-color: #0080ff;
+    background-color: #4c00ff;
     border: none;
     color: #000000;
     padding: 5px 10px;
@@ -66,13 +66,13 @@
   
   /* Day and Time Grid */
   .rbc-time-view .rbc-time-header {
-    background-color: #f8f9fa;
+    background-color: #0080ff;
   }
   
   .rbc-header {
     text-align: center;
     padding: 5px 0;
-    background-color: #e9ecef;
+    background-color: #0883ff;
     font-weight: bold;
     border-bottom: 1px solid #ddd;
   }
@@ -90,7 +90,7 @@
   }
   
   .rbc-day-bg {
-    background-color: #fdfdfd;
+    background-color: #c0bfbf00;
   }
   
   .rbc-day-bg:hover {

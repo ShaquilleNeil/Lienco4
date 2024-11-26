@@ -10,6 +10,7 @@ import MeetingScheduler from './PMDashboard/meetingscheduler.jsx';
 import Chart from './PMDashboard/chart.jsx'
 import Rchart from './PMDashboard/rchart.jsx';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import ChatBubble from './ChatBubble.jsx';
 
 
 const DashUser = ({ onLogout, userRole, spentAmount, totalAmount,resourceData, events }) => {
@@ -157,13 +158,10 @@ const DashUser = ({ onLogout, userRole, spentAmount, totalAmount,resourceData, e
         </div>
        
 
-        <div className='rghtside'>
-         
-          <div className='dashtainer3'>
-           
-          </div>
-        </div>
+       
       </div>
+      <ChatBubble />
+
     </div>
   );
 };
