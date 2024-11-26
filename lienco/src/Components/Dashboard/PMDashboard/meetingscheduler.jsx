@@ -148,7 +148,7 @@ const fetchEvents = async () => {
           <strong>{selectedSlot ? moment(selectedSlot).format('LL') : 'None'}</strong>
         </label>
       </div>
-      <div>
+      <div className='below'>
         <label className="cal">
           User Email:
           {loading ? (
@@ -169,10 +169,10 @@ const fetchEvents = async () => {
           )}
         </label>
       </div>
-      <div>
+      <div className='below2'>
         <label className="cal">
           Meeting Details:
-          <input
+          <textarea className='mdet'
             type="text"
             value={meetingDetails}
             onChange={(e) => setMeetingDetails(e.target.value)}
@@ -180,7 +180,7 @@ const fetchEvents = async () => {
           />
         </label>
       </div>
-      <button className="calb" onClick={handleScheduleMeeting}>
+      <button className="calbutton" onClick={handleScheduleMeeting}>
         Schedule Meeting
       </button>
     </div>

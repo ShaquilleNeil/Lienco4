@@ -134,7 +134,15 @@ const DashUser = ({ onLogout, userRole, spentAmount, totalAmount,resourceData, e
                 <li
                   key={notification.id}
                   onClick={() => handleNotificationClick(notification.ticketId)}  // Click handler to navigate
-                  style={{ cursor: 'pointer', textDecoration: 'underline' }}  // Style to make it clickable
+                  style={{ cursor: 'pointer', textDecoration: 'none',
+                    padding: '10px',
+            backgroundColor: 'black',
+            color: 'white',
+            border: '1px solid #ddd',
+            borderRadius: '8px',
+            marginBottom: '10px',
+            boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+            transition: 'background-color 0.3s ease', }}  // Style to make it clickable
                 >
                   <p>{notification.message}</p>
                   <small>{new Date(notification.timestamp).toLocaleString()}</small>

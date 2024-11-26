@@ -154,3 +154,97 @@
   .cal{
     color: white;
   }
+
+  .below {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .cal {
+    display: flex;
+    width: 100%;
+    font-size: 16px;
+    margin-bottom: 8px;
+    text-align: left;
+    align-items: center;
+    justify-content: left;
+  }
+  
+  .cal span {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .email-dropdown, .meeting-input {
+    width: 25%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    box-sizing: border-box; /* Ensures padding is included in the width */
+  }
+  
+  .email-dropdown {
+    font-size: 14px;
+  }
+  
+  .meeting-input {
+    font-size: 14px;
+  }
+  
+  .calb {
+    display: inline-block;
+    background-color: #0055f1;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .mdet{
+    border-radius: 10px;
+  }
+  
+  .calbutton{
+       width: 20%;
+      height: 50px;
+      font-size: 14px;
+      margin-top: 10px;
+      background-color: #00a2ff;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      margin-bottom: 10px;
+  }
+  
+  .calbutton:hover {
+    background-color: #37a2d4;
+    box-shadow: 0px 15px 20px #0274d1b7;
+    color: #fff;
+  }
+
+  .calb:hover {
+    background-color: #45a049;
+  }
+  
+  .calb:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .below p {
+    font-size: 14px;
+    color: #666;
+  }
+  
