@@ -17,10 +17,30 @@ const ADDashUser = ({ onLogout, userRole, events }) => {
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const auth = getAuth();
+  const [weather, setWeather] = useState(null);
   const user = auth.currentUser;
   const navigate = useNavigate();  // Initialize useNavigate for navigation
   const [meetings, setMeetings] = useState([]);
 
+  const fetchWeather = async () => {
+    const apiKey = '0efcae3c3b8e82217ec228271583e1bf'; // Replace with your OpenWeatherMap API key
+    const city = 'Montreal'; // Replace with your desired city
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+  
+      // Extract weather details
+      setWeather({
+        temperature: data.main.temp,
+        condition: data.weather[0].description,
+        icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
+      });
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
+    }
+  };
 
   const today = new Date();
   const todayMeetings = meetings.filter((meeting) => {
@@ -82,7 +102,7 @@ const ADDashUser = ({ onLogout, userRole, events }) => {
   };
 
   useEffect(() => {
-
+    fetchWeather();
     fetchMeetings(setMeetings);
 
     if (user) {
@@ -129,17 +149,25 @@ const ADDashUser = ({ onLogout, userRole, events }) => {
         
       <div className='addashcontent'>
         <div className='adtopbox'>
-          <div className='adtopbox1'>
-
-
+        <div className='adtopbox1'>
+            {weather ? (
+              <div className="weather-container">
+                <h4>Weather Update</h4>
+                <img src={weather.icon} alt="Weather Icon" />
+                <p>{weather.temperature}°C</p>
+                <p>{weather.condition}</p>
+              </div>
+            ) : (
+              <p>Loading weather...</p>
+            )}
           </div>
           <div className='adtopbox2'>
             <h4>Scheduled Meetings</h4>
             <p className='adcounting'>{todayMeetings.length} meetings today</p>
           </div>
-          <div className='adtopbox3'>
+          {/* <div className='adtopbox3'>
           
-          </div>
+          </div> */}
           <div className='adtopbox4' onClick={toggleAform}>
            <h4>Manage user roles</h4>
           </div>
