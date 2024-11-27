@@ -6,8 +6,8 @@ import { collection, addDoc, doc, updateDoc, getDoc, getDocs } from 'firebase/fi
 import Header from '../Dashboard/Header.jsx';
 import Sidebar from '../Dashboard/SideBar.jsx';
 import './ticketpage.css';
-import { auth } from '../firebase'; // Ensure you import Firebase auth
-import { onAuthStateChanged } from 'firebase/auth'; // Import the auth state change listener
+import { auth } from '../firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const fetchUserRole = async (userId) => {
   const roleDoc = await getDoc(doc(db, 'Roles', userId)); // Fetch role document using user ID
@@ -15,28 +15,27 @@ const fetchUserRole = async (userId) => {
     return roleDoc.data().role; // Return the role if document exists
   } else {
     console.log('No such document!');
-    return null; // Return null if no document found
+    return null;
   }
 };
 
-
-
-
 const TicketPage = () => {
   const location = useLocation();
-  const editMode = location.state?.editMode || false; // Use location state to determine edit mode
+  const editMode = location.state?.editMode || false;
 
-  const [categories, setCategories] = useState([]); // State for categories
+  const [categories, setCategories] = useState([]); // Categories state
+  const [users, setUsers] = useState([]); // Users state
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    category: '', // This should match the field in Firestore
+    category: '',
     newCategory: '',
     priority: 1,
     status: 'not started',
     progress: 0,
     owner: '',
     avatar: '',
+    assignedUser: '', // Field to store assigned user
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -44,51 +43,69 @@ const TicketPage = () => {
   const { id } = useParams();
   const [userRole, setUserRole] = useState(null);
 
-  // Function to fetch categories from Firestore
-// Function to fetch categories from Firestore
-const fetchCategories = async () => {
-  try {
-    const querySnapshot = await getDocs(collection(db, 'tickets')); // Replace with your collection name
-    const categoriesArray = [];
+  // Fetch categories
+  const fetchCategories = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'tickets'));
+      const categoriesArray = [];
 
-    querySnapshot.forEach((doc) => {
-      const category = doc.data().category; // Get category
-      if (category && !categoriesArray.includes(category)) { // Check if the category is not already included
-        categoriesArray.push(category); // Push category without quotes
+      querySnapshot.forEach((doc) => {
+        const category = doc.data().category;
+        if (category && !categoriesArray.includes(category)) {
+          categoriesArray.push(category);
+        }
+      });
+
+      setCategories(categoriesArray);
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+    }
+  };
+
+  // Fetch users for combobox
+  const fetchUsers = async () => {
+    try {
+      const userCollectionRef = collection(db, 'Roles');
+      const userSnapshot = await getDocs(userCollectionRef);
+      const userList = userSnapshot.docs.map((doc) => {
+        const data = doc.data();
+        return  data.Email || '' ;
+      });
+      setUsers(userList);
+    } catch (err) {
+      setError('Failed to fetch users');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Handle logout
+  const handleLogout = async () => {
+    try {
+      await auth.signOut();
+      setUserRole(null);
+      navigate('/');
+    } catch (error) {
+      console.error('Logout failed:', error.message);
+    }
+  };
+
+  // Fetch user role
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const role = await fetchUserRole(user.uid);
+        setUserRole(role);
+      } else {
+        setUserRole(null);
       }
+      setLoading(false);
     });
 
-    setCategories(categoriesArray); // Set unique categories
-  } catch (error) {
-    console.error('Error fetching categories:', error);
-  }
-};
+    return () => unsubscribe();
+  }, []);
 
-const handleLogout = async () => {
-  try {
-    await auth.signOut(); // Sign out from Firebase
-    setUserRole(null); // Reset user role on logout
-    navigate('/'); 
-  } catch (error) {
-    console.error("Logout failed: ", error.message); // Log the error message
-  }
-};
-
-useEffect(() => {
-  const unsubscribe = onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      const role = await fetchUserRole(user.uid); // Fetch role on successful login
-      setUserRole(role);
-    } else {
-      setUserRole(null);
-    }
-    setLoading(false); // Set loading to false after fetching user role
-  });
-
-  return () => unsubscribe();
-}, []);
-
-
+  // Handle form changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -97,19 +114,33 @@ useEffect(() => {
     }));
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-
+  
     try {
+      const currentUser = auth.currentUser; // Get the current user
+      const assignedUserEmail = formData.assignedUser; // Use the selected assigned user's email
+      const createdByEmail = currentUser.email; // Get the email of the person creating the ticket
+  
+      // Update form data to include the assignedUser's email as the category and the createdByEmail
+      const formDataWithCategory = {
+        ...formData,
+        category: assignedUserEmail, // Set the category to the assigned user's email
+        assignedUserEmail, // Also include the assignedUserEmail explicitly
+        createdByEmail, // Include the email of the person creating the ticket
+      };
+  
       if (editMode) {
         const ticketRef = doc(db, 'tickets', id);
-        await updateDoc(ticketRef, formData);
+        await updateDoc(ticketRef, formDataWithCategory); // Update ticket
       } else {
-        await addDoc(collection(db, 'tickets'), formData);
+        await addDoc(collection(db, 'tickets'), formDataWithCategory); // Create new ticket
       }
-      navigate('/pdash', { state: { refresh: true } });
+  
+      navigate('/pdash', { state: { refresh: true } }); // Redirect after success
     } catch (error) {
       console.error('Submission failed:', error);
       setError(`Failed to submit the ticket: ${error.message}`);
@@ -117,7 +148,9 @@ useEffect(() => {
       setLoading(false);
     }
   };
-
+  
+  
+  // Fetch data for editing
   const fetchData = async () => {
     try {
       const ticketRef = doc(db, 'tickets', id);
@@ -133,7 +166,8 @@ useEffect(() => {
   };
 
   useEffect(() => {
-    fetchCategories(); // Fetch categories when the component mounts
+    fetchCategories();
+    fetchUsers(); // Fetch users when the component mounts
     if (editMode) {
       fetchData();
     }
@@ -147,7 +181,7 @@ useEffect(() => {
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <div className="ticket-container">
-        <form onSubmit={handleSubmit}>
+        <form className="ticket-form" onSubmit={handleSubmit}>
           <section>
             <label htmlFor="title">Title</label>
             <input
@@ -182,6 +216,21 @@ useEffect(() => {
                 </option>
               ))}
             </select>
+
+            <label>Assigned User</label>
+            <select
+  name="assignedUser"
+  value={formData.assignedUser}
+  onChange={handleChange}
+  required
+>
+  <option value="">Select a user</option>
+  {users.map((email, index) => (
+    <option key={index} value={email}>
+      {email}
+    </option>
+  ))}
+</select>
 
             <label htmlFor="new-category">New Category</label>
             <input
@@ -256,10 +305,8 @@ useEffect(() => {
               type="url"
               onChange={handleChange}
             />
-            <div className="img-preview">
-              {formData.avatar && (
-                <img src={formData.avatar} alt="image preview" />
-              )}
+            <div className="avatar-preview">
+              {formData.avatar && <img className="avatar" src={formData.avatar} alt="Avatar" />}
             </div>
           </section>
         </form>

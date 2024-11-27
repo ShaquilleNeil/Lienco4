@@ -1,6 +1,7 @@
 import React from 'react';
 import './SideBar.css';
 import { Link as RouterLink } from 'react-router-dom';
+import NotificationBell from './notificationbell'; // Import your NotificationBell component
 import logo1 from '../Images/lienco3.png';
 
 const SideBar = ({ userRole }) => {
@@ -11,6 +12,11 @@ const SideBar = ({ userRole }) => {
     <div className='sidenav'>
       <div className='sidenav-logo'>
         <img src={logo1} alt='logo' />
+      </div>
+
+      {/* Add Notification Bell */}
+      <div className='notification-bell-container'>
+        <NotificationBell />
       </div>
 
       <ul className='sidenav-menu'>

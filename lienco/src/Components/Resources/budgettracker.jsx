@@ -91,7 +91,7 @@ const BudgetTracker = () => {
   };
 
   return (
-    <Paper style={{ padding: '20px', textAlign: 'center', marginBottom: '20px', backgroundColor: 'transparent', color: 'white', border: '1px solid white', borderRadius: '10px' }}>
+    <Paper style={{ padding: '20px', textAlign: 'center', marginBottom: '20px', backgroundColor: 'transparent', color: 'white', border: 'none', borderRadius: '10px', width: '90%',  margin: '0 auto', overflow: 'auto' }}>
       <Typography variant="h6" style={{ marginBottom: '10px' }}>
         Budget Tracker
       </Typography>

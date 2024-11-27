@@ -24,7 +24,8 @@ const Popup = ({ isVisible, onClose, onLogin }) => {
     }
   };
 
-  const togglePasswordVisibility = () => {
+  const togglePasswordVisibility = (e) => {
+    e.preventDefault();
     setShowPassword((prev) => !prev);
   };
 
@@ -50,32 +51,35 @@ const Popup = ({ isVisible, onClose, onLogin }) => {
               required
             />
             <label htmlFor="password">Password:</label>
-            <div style={{ position: 'relative' }}>
-              <input
-                type={showPassword ? 'text' : 'password'}
-                id="password"
-                name="password"
-                placeholder='********'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <button
-                type="button"
-                onClick={togglePasswordVisibility}
-                style={{
-                  position: 'absolute',
-                  right: '1px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                }}
-              >
-                {showPassword ? '👁️' : '👁️‍🗨️'}
-              </button>
-            </div>
+            <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+  <input
+    className="password-input" // Use a consistent class for styling
+    type={showPassword ? 'text' : 'password'}
+    id="password"
+    name="password"
+    placeholder="********"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    required
+  />
+  <button
+    type="button"
+    onClick={togglePasswordVisibility}
+    style={{
+      position: 'absolute',
+      right: '10px',
+      background: 'none',
+      border: 'none',
+      cursor: 'pointer',
+      padding: '0',
+      fontSize: '16px',
+    }}
+    aria-label={showPassword ? 'Hide password' : 'Show password'}
+  >
+    {showPassword ? '👁️' : '👁️‍🗨️'}
+  </button>
+</div>
+
             {error && <p className="error-message">{error}</p>}
             <div className='btn'>
               <button type="submit" className='popup-button1'>Login</button>

@@ -1,4 +1,4 @@
-.nav{
+.nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,71 +12,292 @@
     z-index: 2;
     position: fixed;
     width: 99vw;
-   
 }
 
-.nav-logo img{
+.nav-logo img {
     width: 100%;
     height: 100%;
 }
 
-.nav-logo{
+.nav-logo {
     padding-top: 50px;
     height: 120px;
     width: 120px;
 }
 
-.nav-menu{
+.nav-menu {
     list-style: none;
     align-items: center;
     display: flex;
     gap: 90px;
     font-size: 15px;
     font-weight: 700;
+    position: relative; /* For positioning the animation */
 }
 
-
-
-.nav-menu li{
+.nav-menu li {
     cursor: pointer;
+    position: relative; /* To allow positioning of the animated element */
 }
 
-
-.nav-menu li a{
+.nav-menu li a {
     text-decoration: none;
     color: white;
     font-size: 18px;
     transition: color 0.3s;
 }
 
-.nav-menu li a:hover{
-    border-bottom: 3px solid #fffb00;
-    
+.nav-menu li a:hover {
+    color: #fffb00; /* Change color on hover */
 }
 
-.nav-menu .active{
-   
+.nav-menu li a::before {
+    content: '';
+    position: absolute;
+    bottom: -5px; /* Position below the text */
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #fffb00; /* Yellow underline */
+    transform: scaleX(0); /* Start with no width */
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out; /* Smooth transition */
+}
+
+.nav-menu li a:hover::before {
+    transform: scaleX(1); /* On hover, expand the underline */
+    transform-origin: bottom left;
+}
+
+.nav-menu .active {
+    font-weight: bold;
+    color: blue;
     border-bottom: 3px solid #00c3ff;
 }
 
-.emergency{
+.emergency {
     background-color: rgb(255, 0, 0);
     padding: 10px 20px;
     border-radius: 50px;
     cursor: pointer;
 }
 
-.active {
-    font-weight: bold;
-    color: blue; 
-  }
-
-  .logout-button{
-    background-color: #36b8f4; /* Red background for logout button */
+.nav .logout-button {
+    background-color: #36b8f4; /* Blue background for logout button */
     color: white; /* Text color */
     border: none;
     padding: 10px 15px;
     border-radius: 5px; /* Rounded corners */
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+
+.nav .logout-button:hover {
+    background-color: #1eff00; /* Red background on hover */
+    color: #fff;
+    transform: translateY(-1px);
+    border: 0.5px solid #000000;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger .line {
+    width: 30px;
+    height: 4px;
+    background-color: white;
+}
+
+
+@media (max-width: 768px) {
+    /* Hide the regular menu on mobile */
+    .nav-menu {
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        background-color: black;
+        position: absolute;
+        top: 50px; /* Adjust for navbar height */
+        left: 0;
+        z-index: 1;
+    }
+
+
+
+    /* Show the menu when the hamburger is clicked */
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-menu ul{
+        margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: #fff;
+
+    }
+
+    .nav-menu li a {
+        display: block;
+        padding: 20px 20px;
+        border-right: 1px solid #f4f4f4;
+        text-decoration: none;
+    }
+
+    /* Keep the emergency button centered in the navbar */
+    .emergency {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2; /* Keep it above the menu */
+    }
+
+    .nav-logo {
+        position: fixed;
+        top: 5%;
+        left: 15%;
+        transform: translate(-50%, -50%);
+        z-index: 2; /* Keep it above the menu */
+    }
+
+    .nav-logo img {
+        width: 50%;
+        height: 50%;
+    }
+    
+    .hamburger {
+        display: flex; /* Show hamburger icon */
+    }
+
+    
+}
+
+.menu-btn{
+    display: none;}
+
+@media (max-width: 768px) {
+    .nav-menu {
+      display: none;
+    }
+    .nav-menu.active {
+      display: flex;
+    }
+    .nav-logo {
+      position: fixed;
+      top: -5%;
+      left: 15%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+    .nav-logo img {
+      width: 50%;
+    }
+  
+    .menu-icon {
+        position: absolute;
+        right: 20px; /* Ensure it's on the right */
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+    .emergency {
+
+      top: 50%;
+      left: 50%;
+      z-index: 3;
+    }
+
+    /* Mobile Menu (Hamburger) */
+  .menu-btn {
+    display: none;
   }
+  
+  .menu-icon {
+    display: block;
+    cursor: pointer;
+    position: absolute; /* Move to the right */
+    right: 20px; /* Adjust distance from the right edge */
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .menu-icon .navicon {
+    background: #fff;
+    display: block;
+    height: 3px;
+    width: 30px;
+    position: relative;
+    transition: background .3s ease-out;
+  }
+  
+  .menu-icon .navicon:before,
+  .menu-icon .navicon:after {
+    content: '';
+    background: #fff;
+    height: 3px;
+    width: 30px;
+    position: absolute;
+    transition: all .3s ease-out;
+  }
+  
+  .menu-icon .navicon:before {
+    top: -10px;
+  }
+  
+  .menu-icon .navicon:after {
+    top: 10px;
+  }
+  
+  /* When menu-btn is checked, toggle the menu visibility */
+  .menu-btn:checked + .menu-icon .navicon {
+    background: transparent;
+  }
+  
+  .menu-btn:checked + .menu-icon .navicon:before {
+    transform: rotate(45deg);
+    top: 0;
+  }
+  
+  .menu-btn:checked + .menu-icon .navicon:after {
+    transform: rotate(-45deg);
+    top: 0;
+  }
+  
+  .menu-btn:checked ~ .nav-menu {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    left: 0;
+    z-index: 1;
+  }
+  
+  .nav-menu li {
+    width: 100%;
+    text-align: center;
+    padding: -10px;
+    border-top: 1px solid #444;
+  }
+
+  .nav-menu li a {
+    display: block;
+    padding: 1px;
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  .nav-menu li a:hover {
+    background-color: #444;
+  }
+  
+  }
+  

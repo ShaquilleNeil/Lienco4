@@ -20,15 +20,15 @@
 
 
 .aform-content form{
-  width: 500px;
-  height: 100%;
-  padding: 25px;
-  background: transparent;
-  border: 2px solid rgba(255,255,255,1.8);
-  border-radius: 50px;
-  backdrop-filter: blur(20px);
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
- margin-bottom: 80px;
+  position: relative;
+    width: 500px;
+    height: auto;
+    padding: 10px 10px;
+    background: rgba(0, 0, 0, 0.842);
+    border-radius: 15px;
+    box-shadow: 7px 7px 30px rgba(255, 255, 255, 0.5);
+    margin-top: 20px;
+    z-index: 1; /* Ensure the form is on top */
 
 }
 
@@ -43,37 +43,25 @@
 .aform-content form input[type="text"],
 .aform-content form input[type="tel"],
 .aform-content form select {
-    display: block;
-    width: 90%;
-    height: 8px;
-    margin-bottom: 0;
-    border: none;
-    outline: none;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    background-color: rgb(255, 255, 255);
-    color: #333;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-    font-family:Verdana, Geneva, Tahoma, sans-serif ;
-    margin-bottom: 10px;
+  background: #ecf0f3;
+  padding: 10px;
+  padding-left: 20px;
+  height: 40px;
+  width: 90%;
+  font-size: 14px;
+  border-radius: 10px;
+  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
 }
 
 .aform-content form textarea{
-    display: block;
-    width: 90%;
-    height: 150px;
-    margin-bottom: 0;
-    border: none;
-    outline: none;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    background-color: rgb(255, 255, 255);
-    color: #333;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-    font-family:Verdana, Geneva, Tahoma, sans-serif ;
-    margin-bottom: 10px;
+  background: #ecf0f3;
+  padding: 10px;
+  padding-left: 20px;
+  width: 90%;
+  height: 200px;
+  font-size: 14px;
+  border-radius: 10px;
+  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
 }
 
 
@@ -81,42 +69,42 @@
 
 
 .aform-content form label {
-    display: flex;
-    margin-bottom: 10px;
-    font-size: 15px;
-    color: #fff;
-    font-family:Verdana, Geneva, Tahoma, sans-serif ;
+  color: #ffffff;
+  font-size: 18px;
+  letter-spacing: 1px;
+  display: flex;
+  margin-left: 15px;
   }
    
 .aform-content form .aformbutton {
-    width: 100%;
-    height: 50px;
-    background-color: rgba(3, 3, 3, 0.6);
-    border: none;
-    outline: none;
-    border-radius: 50px;
-    color: #fff;
-    cursor: pointer;
-    border: 1px solid rgba(255,255,255,1.8);
-    font-size: 30px;
-     font-weight: 500;
-     margin-top: 30px;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  width: 100%;
+  height: 45px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #00a2ff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  margin-top: 10px;
    }
  
    .aform-content form h2 {
      text-align: center;
      margin-bottom: 50px;
      color: #fff;
-     text-decoration: underline;
+     text-decoration: none;
    }
  
    .aform-content form .aformbutton:hover {
-    background-color: #d4af37;
-    box-shadow: 0px 15px 20px #d4af37b7;
+    background-color: #00a2ff;
+    box-shadow: 0px 15px 20px #00a2ff;
     color: #fff;
     transform: translateY(-7px);
     border: 0.5px solid #000000;
@@ -133,4 +121,51 @@
    color:rgb(151, 0, 0);
   }
 
-
+  @media (max-width: 768px) {
+    /* Adjust overlay background */
+    .aform-overlay {
+      background: rgba(0, 0, 0, 0.7); /* Slightly more transparent overlay */
+    }
+  
+    /* Make form container full width and center it */
+    .aform-content form {
+      width: 70%; /* Take up more space on small screens */
+      padding: 15px;
+      left: 1%;
+    }
+  
+    /* Adjust input fields for smaller screens */
+    .aform-content form input[type="email"],
+    .aform-content form input[type="password"],
+    .aform-content form input[type="text"],
+    .aform-content form input[type="tel"],
+    .aform-content form select,
+    .aform-content form textarea {
+      width: 90%; /* Full-width inputs */
+      font-size: 16px; /* Increase font size for better readability */
+      padding: 10px;
+    }
+  
+    .aform-content form textarea {
+      height: 120px; /* Reduce textarea height */
+    }
+  
+    /* Adjust form heading */
+    .aform-content form h2 {
+      font-size: 24px; /* Smaller font size for the heading */
+      margin-bottom: 20px;
+    }
+  
+    /* Adjust button for mobile */
+    .aform-content form .aformbutton {
+      height: 50px; /* Make the button taller for easier touch interaction */
+      font-size: 14px; /* Adjust font size */
+    }
+  
+    /* Close button adjustments for mobile */
+    .aform-content .aformicon-close {
+      top: 15px;
+      right: 15px;
+      font-size: 25px; /* Make close icon slightly smaller */
+    }
+  }

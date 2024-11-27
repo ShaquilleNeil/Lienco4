@@ -9,14 +9,20 @@
     cursor: pointer;
     animation: blink 1s infinite; /* Blink animation */
     box-shadow: 0 0 70px rgba(255, 10, 10, 1.8);
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+    transition: all 0.3s ease 0s;
    
 }
 
 .emergency:hover{
     background-color: #ff0000;
-    box-shadow: 0px 15px 20px rgba(255, 0, 0, 0.4);
+    box-shadow: 0px 15px 20px #ff0000b7;
     color: #fff;
-    transform: translateY(-1px);
+    transform: translateY(-3px);
+    border: none;
 }
 @keyframes blink {
     0% {
@@ -30,3 +36,28 @@
     }
 }
 
+/* .contact button{
+    width: 240px;
+    height: 45px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #00a2ff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+button:hover{
+    background-color: #d4af37;
+    box-shadow: 0px 15px 20px #d4af37b7;
+    color: #fff;
+    transform: translateY(-7px);
+    border: 0.5px solid #000000;
+} */

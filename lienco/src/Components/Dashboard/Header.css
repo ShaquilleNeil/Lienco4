@@ -1,7 +1,7 @@
 
 .header{
     width: 100vw;
-    background: radial-gradient(circle at 10% 20%, rgb(22, 22, 22) 0%, rgb(64, 64, 64) 90.2%);/* Change to your preferred color */
+    background-color: transparent;
     color: rgb(0, 0, 0);
     padding: 10px 20px; /* Add some padding */
     position: fixed; /* Keeps the header fixed at the top */
@@ -13,7 +13,7 @@
     justify-content: space-between;
     align-items: center;
     width: calc(100% - 200px);
-    box-shadow: 7px 7px 30px rgba(76, 117, 85, 0.301);
+
 }
 button{
     background: transparent;    
@@ -22,7 +22,7 @@ button{
 }
 
 
-input{
+.search-input{
     width: 200px;
     height: 15px;
     border-radius: 10px;
@@ -34,16 +34,16 @@ input{
     color: rgb(0, 0, 0);
 }
 
-input:focus{
+.search-input:focus{
     border: 2px solid black;
 }
 
-input:active{
+.search-input:active{
     border: 2px solid black;
 
 }
 
-input:hover{
+.search-input:hover{
     border: 2px solid black;
 }
 
@@ -71,4 +71,21 @@ span{
     font-weight: bold;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
+}
+
+.logout-button {
+    background-color: #36b8f4; /* Blue background for logout button */
+    color: white; /* Text color */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #1eff00; /* Red background on hover */
+    color: #fff;
+    transform: translateY(-1px);
+    border: 0.5px solid #000000;
 }

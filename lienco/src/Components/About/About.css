@@ -1,16 +1,15 @@
+/* About Section */
 .about {
     position: relative; 
     width: 100%;
     height: 100vh;
     background: linear-gradient(rgba(0, 0, 0, 0.788), rgba(0, 0, 0, 0.778)), 
         url('../Images/image1.jpg') no-repeat center center;
-     margin: 0;
-     padding: 0%;
+    margin: 0;
+    padding: 0%;
     background-size: cover;
     display: flex;
-   
 }
-
 
 .aboutcontent {
     position: relative; 
@@ -23,30 +22,32 @@
     padding: 20px;
     text-align: center;
     z-index: 1;
-   
 }
 
 .info-side {
     margin-left: 500px;
     background-color: rgba(56, 62, 77, 0.288); 
-    padding:30px;
+    padding: 30px;
     width: 90%;
     height: 700px;
     float: right;
     text-align: left;
     display: grid;
     flex: 1;
-    grid-template-rows:repeat(3, 1fr);
-    font-family:'Roboto', sans-serif;
+    grid-template-rows: repeat(3, 1fr);
+    font-family: 'Roboto', sans-serif;
     font-size: 1.2rem;
-   color: rgb(0, 0, 0);
-   border-radius: 30px;
-   background-image: linear-gradient(90deg, #000000,#2C272E);
-   box-shadow: 7px 7px 30px rgba(141, 144, 146, 0.5);
-   padding-bottom: 90px;
+    color: rgb(0, 0, 0);
+    border-radius: 30px;
+    background-image: linear-gradient(90deg, #000000, #2C272E);
+    box-shadow: 7px 7px 30px rgba(141, 144, 146, 0.5);
+    padding-bottom: 90px;
+    transform: translateY(50px); /* Start position for animation */
+    opacity: 0;
+    animation: slideUp 0.5s forwards; /* Apply animation */
 }
 
-.info-side h1{
+.info-side h1 {
     padding: 0px;
     text-align: left;
     font-size: 30px;
@@ -55,77 +56,73 @@
     letter-spacing: 1.5px;
     margin-bottom: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  
 }
 
-.info-side p{
+.info-side p {
     color: #ffffff;
     padding-left: 100px;
 }
 
-
-
 .info-side button {
-   
     width: 240px;
-  height: 45px;
-  font-family: 'Roboto', sans-serif;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 2.5px;
-  font-weight: 500;
-  color: #000;
-  background-color: #00a2ff;
-  border: none;
-  border-radius: 45px;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease 0s;
-  cursor: pointer;
-  outline: none;
+    height: 45px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #00a2ff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
 }
 
 .info-side button:hover {
-    background-color: #d4af37;
-    box-shadow: 0px 15px 20px #d4af37b7;
+    background-color: #00a2ff;
+    box-shadow: 0px 15px 20px #00a2ff;
     color: #fff;
     transform: translateY(-7px);
     border: 0.5px solid #000000;
 }
 
-
-.image-side{
+.image-side {
     box-shadow: 7px 7px 30px rgba(255, 255, 255, 0.582);
-    position: absolute; /* Absolute positioning to overlap */
-    top: 250px; /* Move image upwards to overlap */
-    left: 20px; /* Adjust the left position */
-    width: 600px; /* Width of the image */
+    position: absolute;
+    top: 250px;
+    left: 20px;
+    width: 600px;
     z-index: 1;
     height: 300px;
-    
-    
+    transform: translateY(-50px); /* Start position for animation */
+    opacity: 0;
+    animation: slideDown 0.5s forwards; /* Apply animation */
 }
 
-.image-side img{
+.image-side .image {
     width: 100%;
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Card-like shadow */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
 }
 
-.sub{
+.sub {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.sub1{
+.sub1 {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.sub3{
+.sub3 {
     height: 100%;
     display: flex;
     align-items: center;
@@ -133,28 +130,181 @@
     padding-top: 20px;
 }
 
-@media (max-width: 768px) {
-    
+/* New Section Transition */
+.page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.content-wrapper {
+    display: flex;
+    width: 80vw;
+    min-height: 80vh;
+    position: relative;
+}
+
+/* input {
+    display: none;
+} */
+
+#section-1, #section-2 {
+    display: flex;
+    width: 80vw;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#section-1 {
+    opacity: 1;
+    z-index: 5;
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+#section-2 {
+    opacity: 0;
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+.image-container {
+    width: 50%;
+    height: 100%;
+    background-color: lightblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.image {
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.info-container {
+    width: 50%;
+    height: 100%;
+    background-color: lightsalmon;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#section-2 .image-container {
+    opacity: 0;
+    transform: translateY(2em);
+    transition: all 1s 0.7s;
+}
+
+#section-2 .info-container {
+    opacity: 0;
+    transform: translateY(-2em);
+    transition: all 1s 0.7s;
+}
+
+
+
+#toggle2:checked ~ #section-2 {
+    opacity: 1;
+}
+
+#toggle2:checked ~ #section-1 {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+}
+
+#toggle2:checked ~ #section-2 .image-container,
+#toggle2:checked ~ #section-2 .info-container {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#toggle3:checked ~ #section-1 {
+    transition: transform 0.5s 0.5s, opacity 0.5s 0.5s;
+}
+
+#toggle3:checked ~ #section-2 .image-container,
+#toggle3:checked ~ #section-2 .info-container {
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+/* Keyframe Animations for the floating effect */
+@keyframes slideUp {
+    from {
+        transform: translateY(500px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-500px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 508px) {
     .aboutcontent {
-      flex-direction: column; 
+        flex-direction: column; 
+        padding: 20px; /* Add padding for spacing */
+        overflow: auto;
     }
-  
+
+    .about {
+        height: 100vh; /* Remove fixed height */
+    }
+
     .image-side {
-      width: 100%;
-      top: -30px; /* Adjust positioning */
+        margin-top: 100px;
+        width: 100%;
+        top: -30px; /* Adjust positioning */
     }
-  
+
     .info-side {
-      padding: 20px; 
-      margin-left: 0; /* Remove left margin */
-      margin-top: 20px; /* Add margin for spacing */
+        margin-top: 800px;
+        padding: 20px; 
+        margin-left: 0; /* Remove left margin */
+        height: 100vh;
     }
-  
+
     h1 {
-      font-size: 1.8rem; 
+        font-size: 1.8rem; 
     }
-  
+
+    .info-side p {
+        padding-left: 0;
+        font-size: 14px;
+    }
+
     .contact-button {
-      width: 100%; 
+        width: 100%; 
+        margin-top: 20px;
+    }
+
+    .info-side button {
+        width: 100%;
+        height: 50px;
+        font-size: 14px;
+    }
+
+    .image-side .image {
+        width: 100%;
+        height: auto;
     }
 }

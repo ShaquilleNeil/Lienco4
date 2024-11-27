@@ -35,7 +35,7 @@ const Header = ({ onLogout }) => {
 
   return (
     <div className="header">
-      <input type="text" name="search" id="search" placeholder="Search" />
+      <input className="search-input" type="text" name="search" id="search" placeholder="Search" />
       <button onClick={handleLogout} className="logout-button">Logout</button>
       {userEmail ? (
         <span>{userEmail}</span>
