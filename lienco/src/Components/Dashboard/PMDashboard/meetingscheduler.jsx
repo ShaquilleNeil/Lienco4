@@ -32,11 +32,6 @@ const MeetingScheduler = ({ onMeetingScheduled }) => {
     }
   };
 
-  // Fetch events from Firestore to display on page load
-// Fetch events from Firestore to display on page load
-
-
-
 
 const fetchEvents = async () => {
   try {
