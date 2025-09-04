@@ -5,14 +5,53 @@
   background-image: url('../../Images/5630939.jpg');
   background-size: cover;
   overflow: auto;
-  padding-top: 80px; /* Add top padding to push content below the fixed .topbox */
+  padding-top: 10px; /* Add top padding to push content below the fixed .topbox */
 }
 
+.weather-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* Spacing between elements */
+  justify-content: center;
+  width: 100%;
+}
+
+.weather-container h4 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #01579b; /* Deep blue for the header */
+  margin-bottom: 10px;
+ 
+}
+
+.weather-container img {
+  width: 80px;
+  height: 80px;
+}
+
+.weather-container p {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.weather-container p:nth-child(3) { /* Temperature styling */
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #d32f2f; /* Red for temperature */
+}
+
+.weather-container p:nth-child(4) { /* Condition text styling */
+  font-style: italic;
+  color: #555;
+  text-transform: capitalize; /* Capitalizes the first letter */
+}
 
 .dashcontent {
   display: flex;
   flex: 1; /* Expands to fill available space */
-  margin-top: 60px; /* Space under the header */
+  margin-top: -200px; /* Space under the header */
   margin-bottom: 10px;
   gap: 40px; /* Space between dashtainer1 and the right stack */
   flex-direction: column;
@@ -133,6 +172,7 @@ animation: slideDown 0.5s ease;
   flex-direction: column;
   width: 100%;
   justify-content: center;
+  align-items: center;
   background-color: rgba(0, 0, 0, 0.589);
   gap: 20px;
   margin-top: 20px; /* Adjust the spacing between each topbox component */
@@ -150,9 +190,10 @@ animation: slideDown 0.5s ease;
 
 .topbox1,.topbox3, .topbox4 {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   background-color: rgba(0, 0, 0, 0.589);
   gap: 20px;
   margin-top: 20px; /* Adjust the spacing between each topbox component */
@@ -167,12 +208,17 @@ animation: slideDown 0.5s ease;
    border: 1px solid rgba(0, 204, 255, 0.397);
 }
 
+.topbox4 h4{
+  margin-top: 0;
+}
+
 .topbox1 h4, .topbox2 h4, .topbox3 h4, .topbox4  h4 {
   font-size: 15px;
   font-weight: 400;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   color: white;
-  margin: 0;
+  text-align: center;
+
 }
 .dashtainer1::-webkit-scrollbar {
   width: 0; /* Remove scrollbar width */

@@ -10,11 +10,13 @@ import MeetingScheduler from './meetingscheduler.jsx';
 import Chart from './chart.jsx'
 import Rchart from './rchart.jsx';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import ChatBubble from '../ChatBubble.jsx';
 
 const DashUser = ({ onLogout, userRole, spentAmount, totalAmount,resourceData, events }) => {
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const auth = getAuth();
+  const [weather, setWeather] = useState(null);
   const user = auth.currentUser;
   const navigate = useNavigate();  // Initialize useNavigate for navigation
   const [meetings, setMeetings] = useState([]);
@@ -30,6 +32,25 @@ const DashUser = ({ onLogout, userRole, spentAmount, totalAmount,resourceData, e
     return meetingDate.toDateString() === today.toDateString();
   });
   
+  const fetchWeather = async () => {
+    const apiKey = '0efcae3c3b8e82217ec228271583e1bf'; // Replace with your OpenWeatherMap API key
+    const city = 'Montreal'; // Replace with your desired city
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+  
+      // Extract weather details
+      setWeather({
+        temperature: data.main.temp,
+        condition: data.weather[0].description,
+        icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
+      });
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
+    }
+  };
 
   const db = getFirestore();
 
@@ -59,7 +80,7 @@ const DashUser = ({ onLogout, userRole, spentAmount, totalAmount,resourceData, e
   };
 
   useEffect(() => {
-
+    fetchWeather();
     fetchMeetings(setMeetings);
 
     if (user) {
@@ -106,9 +127,17 @@ const DashUser = ({ onLogout, userRole, spentAmount, totalAmount,resourceData, e
         
       <div className='dashcontent'>
         <div className='topbox'>
-          <div className='topbox1'>
-
-
+        <div className='topbox1'>
+            {weather ? (
+              <div className="weather-container">
+                <h4>Weather Update</h4>
+                <img src={weather.icon} alt="Weather Icon" />
+                <p>{weather.temperature}°C</p>
+                <p>{weather.condition}</p>
+              </div>
+            ) : (
+              <p>Loading weather...</p>
+            )}
           </div>
           <div className='topbox2'>
             <h4>Scheduled Meetings</h4>
@@ -133,7 +162,15 @@ const DashUser = ({ onLogout, userRole, spentAmount, totalAmount,resourceData, e
                 <li
                   key={notification.id}
                   onClick={() => handleNotificationClick(notification.ticketId)}  // Click handler to navigate
-                  style={{ cursor: 'pointer', textDecoration: 'underline' }}  // Style to make it clickable
+                  style={{ cursor: 'pointer', textDecoration: 'none',
+                    padding: '10px',
+            backgroundColor: 'black',
+            color: 'white',
+            border: '1px solid #ddd',
+            borderRadius: '8px',
+            marginBottom: '10px',
+            boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+            transition: 'background-color 0.3s ease', }}  // Style to make it clickable
                 >
                   <p>{notification.message}</p>
                   <small>{new Date(notification.timestamp).toLocaleString()}</small>
@@ -155,13 +192,9 @@ const DashUser = ({ onLogout, userRole, spentAmount, totalAmount,resourceData, e
         </div>
        
 
-        <div className='rghtside'>
-         
-          <div className='dashtainer3'>
-           
-          </div>
-        </div>
+       
       </div>
+      <ChatBubble />
     </div>
   );
 };

@@ -1,9 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
-
+import React, { useState, useEffect, useRef  } from 'react';
 import './ADDashUser.css';
 import Header from '../Header.jsx';
 import Sidebar from '../SideBar.jsx';
+import { getDatabase, ref, onValue } from 'firebase/database';
+import { getAuth } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';  // Import useNavigate to handle routing
+import BudgetTracker from '../../Resources/budgettracker.jsx';
+import MeetingScheduler from '../PMDashboard/meetingscheduler.jsx';
+import Chart from '../PMDashboard/chart.jsx'
+import Rchart from '../PMDashboard/rchart.jsx';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import ManageUserRoles from './ManageUserRoles'; // Import your role management component
+<<<<<<< HEAD
 import { getDatabase, ref, onValue } from 'firebase/database';
 import { getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate to handle routing
@@ -12,14 +20,51 @@ import MeetingScheduler from '../PMDashboard/meetingscheduler.jsx';
 import Chart from '../PMDashboard/chart.jsx';
 import Rchart from '../PMDashboard/rchart.jsx';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
+=======
+import Carousel from './swiper.jsx'
+>>>>>>> 76007ba71582ffb2881601d3b498d16ec21a042f
 
 const ADDashUser = ({ onLogout, userRole, events }) => {
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const auth = getAuth();
+<<<<<<< HEAD
   const user = auth.currentUser;
   const navigate = useNavigate(); // Initialize useNavigate for navigation
   const [meetings, setMeetings] = useState([]);
+=======
+  const [weather, setWeather] = useState(null);
+  const user = auth.currentUser;
+  const navigate = useNavigate();  // Initialize useNavigate for navigation
+  const [meetings, setMeetings] = useState([]);
+
+  const fetchWeather = async () => {
+    const apiKey = '0efcae3c3b8e82217ec228271583e1bf'; // Replace with your OpenWeatherMap API key
+    const city = 'Montreal'; // Replace with your desired city
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+  
+      // Extract weather details
+      setWeather({
+        temperature: data.main.temp,
+        condition: data.weather[0].description,
+        icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
+      });
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
+    }
+  };
+
+  const today = new Date();
+  const todayMeetings = meetings.filter((meeting) => {
+    const meetingDate = meeting.start; // `start` is already converted to a Date
+    return meetingDate.toDateString() === today.toDateString();
+  });
+  
+>>>>>>> 76007ba71582ffb2881601d3b498d16ec21a042f
   const [isAssessVisible, setIsAssessVisible] = useState(false);
   const aRef = useRef(null);
 
@@ -33,12 +78,15 @@ const ADDashUser = ({ onLogout, userRole, events }) => {
     }
   };
 
+<<<<<<< HEAD
   const today = new Date();
   const todayMeetings = meetings.filter((meeting) => {
     const meetingDate = meeting.start; // `start` is already converted to a Date
     return meetingDate.toDateString() === today.toDateString();
   });
 
+=======
+>>>>>>> 76007ba71582ffb2881601d3b498d16ec21a042f
   useEffect(() => {
     if (isAssessVisible) {
       document.addEventListener('mousedown', handleClickOutside);
@@ -55,7 +103,11 @@ const ADDashUser = ({ onLogout, userRole, events }) => {
   const db = getFirestore();
 
   function fetchMeetings(setMeetings) {
+<<<<<<< HEAD
     const meetingsRef = collection(db, 'meetings');
+=======
+    const meetingsRef = collection(db, "meetings");
+>>>>>>> 76007ba71582ffb2881601d3b498d16ec21a042f
     getDocs(meetingsRef)
       .then((querySnapshot) => {
         const meetings = querySnapshot.docs.map((doc) => {
@@ -68,6 +120,7 @@ const ADDashUser = ({ onLogout, userRole, events }) => {
         setMeetings(meetings);
       })
       .catch((error) => {
+<<<<<<< HEAD
         console.error('Error fetching meetings: ', error);
       });
   }
@@ -78,6 +131,21 @@ const ADDashUser = ({ onLogout, userRole, events }) => {
   };
 
   useEffect(() => {
+=======
+        console.error("Error fetching meetings: ", error);
+      });
+  }
+  
+
+
+  // Handle notification click to navigate to the ticket
+  const handleNotificationClick = (ticketId) => {
+    navigate(`/pdash`);  // Navigate to the ticket page with ticketId in URL
+  };
+
+  useEffect(() => {
+    fetchWeather();
+>>>>>>> 76007ba71582ffb2881601d3b498d16ec21a042f
     fetchMeetings(setMeetings);
 
     if (user) {
@@ -89,7 +157,11 @@ const ADDashUser = ({ onLogout, userRole, events }) => {
         const encodedUserId = encodeEmail(userEmail);
         const db = getDatabase();
         const notificationsRef = ref(db, `notifications/${encodedUserId}`);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 76007ba71582ffb2881601d3b498d16ec21a042f
         const unsubscribe = onValue(
           notificationsRef,
           (snapshot) => {
@@ -118,6 +190,7 @@ const ADDashUser = ({ onLogout, userRole, events }) => {
   }, [user]);
 
   return (
+<<<<<<< HEAD
     <div className="dashuser">
       <Header onLogout={onLogout} />
       <Sidebar userRole={userRole} />
@@ -172,6 +245,87 @@ const ADDashUser = ({ onLogout, userRole, events }) => {
             </div>
           </div>
         )}
+=======
+    <div className='addashuser'>
+      <Header onLogout={onLogout} />
+      <Sidebar userRole={userRole} />
+        
+      <div className='addashcontent'>
+        <div className='adtopbox'>
+        <div className='adtopbox1'>
+            {weather ? (
+              <div className="weather-container">
+                <h4>Weather Update</h4>
+                <img src={weather.icon} alt="Weather Icon" />
+                <p>{weather.temperature}°C</p>
+                <p>{weather.condition}</p>
+              </div>
+            ) : (
+              <p>Loading weather...</p>
+            )}
+          </div>
+          <div className='adtopbox2'>
+            <h4>Scheduled Meetings</h4>
+            <p className='adcounting'>{todayMeetings.length} meetings today</p>
+          </div>
+          {/* <div className='adtopbox3'>
+          
+          </div> */}
+          <div className='adtopbox4' onClick={toggleAform}>
+           <h4>Manage user roles</h4>
+          </div>
+        </div>
+        <div className='adleftside'>
+
+        <div className='addashtainer1'>
+          <h4>Notifications</h4>
+          <ul>
+            {notifications.length > 0 ? (
+              notifications.map((notification) => (
+                <li
+                  key={notification.id}
+                  onClick={() => handleNotificationClick(notification.ticketId)}  // Click handler to navigate
+                  style={{ cursor: 'pointer', textDecoration: 'none',
+                    padding: '10px',
+            backgroundColor: 'black',
+            color: 'white',
+            border: '1px solid #ddd',
+            borderRadius: '8px',
+            marginBottom: '10px',
+            boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+            transition: 'background-color 0.3s ease',}}  // Style to make it clickable
+                >
+                  <p>{notification.message}</p>
+                  <small>{new Date(notification.timestamp).toLocaleString()}</small>
+                </li>
+              ))
+            ) : (
+              <p>No new notifications</p>
+            )}
+          </ul>
+        </div>
+
+        <div className='addashtainer2'>
+            <div className='budgettracker'>
+              <MeetingScheduler />
+            {/* <BudgetTracker /> */}
+            </div>
+          </div>
+
+        </div>
+       
+
+  
+        
+     
+        {isAssessVisible && ( // Conditional rendering
+           <div className="overlay">
+           <div className="form-container" ref={aRef}>
+             <ManageUserRoles onClose={toggleAform} />
+           </div>
+         </div>
+          )}
+>>>>>>> 76007ba71582ffb2881601d3b498d16ec21a042f
       </div>
     </div>
   );

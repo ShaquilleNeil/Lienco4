@@ -17,6 +17,7 @@ const MeetingScheduler = ({ onMeetingScheduled }) => {
   const [meetingDetails, setMeetingDetails] = useState('');
   const [users, setUsers] = useState([]);  // Store the emails of users
   const [loading, setLoading] = useState(true);  // Loading state for fetching users
+  const [userRole, setUserRole] = useState('');  // Store the current user's role
 
   // Fetch users' emails from Firestore
   const fetchUsers = async () => {
@@ -32,53 +33,55 @@ const MeetingScheduler = ({ onMeetingScheduled }) => {
     }
   };
 
+<<<<<<< HEAD
+=======
+  // Fetch events from Firestore to display on page load
+  const fetchEvents = async () => {
+    try {
+      const db = getFirestore(); // Initialize Firestore
+      const auth = getAuth();
+      const user = auth.currentUser;
 
-const fetchEvents = async () => {
-  try {
-    const db = getFirestore(); // Initialize Firestore
-    const auth = getAuth();
-    const user = auth.currentUser;
+      if (user) {
+        // Fetch the user's role from Firestore
+        const userDocRef = doc(db, 'Roles', user.uid); // Assuming 'Roles' collection uses user UID as document ID
+        const userDoc = await getDoc(userDocRef);
+        const userRole = userDoc.exists() ? userDoc.data().role : null;
+        setUserRole(userRole);  // Store user role
 
-    if (user) {
-      // Fetch the user's role from Firestore
-      const userDocRef = doc(db, 'Roles', user.uid); // Assuming 'Roles' collection uses user UID as document ID
-      const userDoc = await getDoc(userDocRef);
-      const userRole = userDoc.exists() ? userDoc.data().role : null;
+        const meetingsRef = collection(db, 'meetings'); // Store meetings in 'meetings' collection
+        const eventSnapshot = await getDocs(meetingsRef);
+        const eventList = eventSnapshot.docs.map(doc => {
+          const data = doc.data();
+          return {
+            title: data.title,
+            // If Firestore stores timestamps, convert them to JavaScript Date objects
+            start: data.start instanceof Timestamp ? data.start.toDate() : new Date(data.start),
+            end: data.end instanceof Timestamp ? data.end.toDate() : new Date(data.end),
+            userEmail: data.userEmail,
+          };
+        });
 
-      const meetingsRef = collection(db, 'meetings'); // Store meetings in 'meetings' collection
-      const eventSnapshot = await getDocs(meetingsRef);
-      const eventList = eventSnapshot.docs.map(doc => {
-        const data = doc.data();
-        return {
-          title: data.title,
-          // If Firestore stores timestamps, convert them to JavaScript Date objects
-          start: data.start instanceof Timestamp ? data.start.toDate() : new Date(data.start),
-          end: data.end instanceof Timestamp ? data.end.toDate() : new Date(data.end),
-          userEmail: data.userEmail,
-        };
-      });
+        // Filtering logic based on user role
+        let filteredEvents;
+        if (userRole === 'project manager') {
+          // Show all events for project manager
+          filteredEvents = eventList;
+        } else {
+          // Show only events that belong to the logged-in user
+          filteredEvents = eventList.filter(event => event.userEmail === user.email);
+        }
+>>>>>>> 76007ba71582ffb2881601d3b498d16ec21a042f
 
-      // Filtering logic based on user role
-      let filteredEvents;
-      if (userRole === 'project manager') {
-        // Show all events for project manager
-        filteredEvents = eventList;
+        console.log("Fetched Events from Firestore:", filteredEvents); // Debugging line
+        setEvents(filteredEvents);
       } else {
-        // Show only events that belong to the logged-in user
-        filteredEvents = eventList.filter(event => event.userEmail === user.email);
+        console.error("No user is currently signed in.");
       }
-      
-      console.log("Fetched Events from Firestore:", filteredEvents); // Debugging line
-      setEvents(filteredEvents);
-
-    } else {
-      console.error("No user is currently signed in.");
+    } catch (err) {
+      console.error('Error fetching events:', err);
     }
-  } catch (err) {
-    console.error('Error fetching events:', err);
-  }
-};
-
+  };
 
   // Fetch events when the component mounts
   useEffect(() => {
@@ -143,41 +146,47 @@ const fetchEvents = async () => {
           <strong>{selectedSlot ? moment(selectedSlot).format('LL') : 'None'}</strong>
         </label>
       </div>
-      <div>
-        <label className="cal">
-          User Email:
-          {loading ? (
-            <p>Loading users...</p>
-          ) : (
-            <select
-              value={userEmail}
-              onChange={(e) => setUserEmail(e.target.value)}
-              className="email-dropdown"
-            >
-              <option value="">Select User Email</option>
-              {users.map((email, index) => (
-                <option key={index} value={email}>
-                  {email}
-                </option>
-              ))}
-            </select>
-          )}
-        </label>
-      </div>
-      <div>
-        <label className="cal">
-          Meeting Details:
-          <input
-            type="text"
-            value={meetingDetails}
-            onChange={(e) => setMeetingDetails(e.target.value)}
-            placeholder="Enter meeting details"
-          />
-        </label>
-      </div>
-      <button className="calb" onClick={handleScheduleMeeting}>
-        Schedule Meeting
-      </button>
+
+      {/* Only show the fields below the calendar if the user is not a 'user' */}
+      {userRole !== 'project manager' || userRole !== 'admin' && (
+        <>
+          <div className='below'>
+            <label className="cal">
+              User Email:
+              {loading ? (
+                <p>Loading users...</p>
+              ) : (
+                <select
+                  value={userEmail}
+                  onChange={(e) => setUserEmail(e.target.value)}
+                  className="email-dropdown"
+                >
+                  <option value="">Select User Email</option>
+                  {users.map((email, index) => (
+                    <option key={index} value={email}>
+                      {email}
+                    </option>
+                  ))}
+                </select>
+              )}
+            </label>
+          </div>
+          <div className='below2'>
+            <label className="cal">
+              Meeting Details:
+              <textarea className='mdet'
+                type="text"
+                value={meetingDetails}
+                onChange={(e) => setMeetingDetails(e.target.value)}
+                placeholder="Enter meeting details"
+              />
+            </label>
+          </div>
+          <button className="calbutton" onClick={handleScheduleMeeting}>
+            Schedule Meeting
+          </button>
+        </>
+      )}
     </div>
   );
 };

@@ -28,20 +28,23 @@ const NotificationBell = () => {
         const encodedUserId = encodeEmail(userEmail);
         const db = getDatabase();
         const notificationsRef = ref(db, `notifications/${encodedUserId}`);
-  
+
         const unsubscribe = onValue(
           notificationsRef,
           (snapshot) => {
             const data = snapshot.val();
             console.log("Fetched notifications:", data);
-  
+
             if (data) {
+              // Convert the notifications object into an array and sort by timestamp descending
               const notificationsArray = Object.keys(data).map((key) => ({
                 id: key,
                 ...data[key],
-              }));
+              })).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)); // Sort by timestamp descending
+
               setNotifications(notificationsArray);
-  
+
+              // Count unread notifications
               const unread = notificationsArray.filter((notification) => !notification.read).length;
               setUnreadCount(unread);
             } else {
@@ -56,14 +59,51 @@ const NotificationBell = () => {
             setLoading(false);
           }
         );
-  
+
         return () => unsubscribe();
       } else {
         console.log("No email found for the logged-in user.");
       }
     }
   }, [user]);
-  
+
+  // Remove read notifications after a delay
+  useEffect(() => {
+    if (notifications.length > 0) {
+      const unreadNotifications = notifications.filter((n) => !n.read);
+      const readNotifications = notifications.filter((n) => n.read);
+
+      // Set a timer to remove read notifications after 30 seconds (or any other delay)
+      const timer = setTimeout(() => {
+        const readNotificationsToRemove = readNotifications.map((notification) => ({
+          id: notification.id,
+          ...notification,
+        }));
+
+        // Remove read notifications from state and update them in the database
+        if (readNotificationsToRemove.length > 0) {
+          const db = getDatabase();
+          const updates = {};
+          const encodedUserId = encodeEmail(user.email);
+
+          // For each read notification, delete it from the database after the delay
+          readNotificationsToRemove.forEach((notification) => {
+            updates[`notifications/${encodedUserId}/${notification.id}`] = null;
+          });
+
+          update(ref(db), updates).catch((error) => {
+            console.error('Error removing notifications:', error);
+            setError('Failed to remove read notifications.');
+          });
+
+          // Update state to reflect changes
+          setNotifications(notifications.filter((n) => !n.read));
+        }
+      }, 30000);  // Set delay to 30 seconds
+
+      return () => clearTimeout(timer); // Clean up the timer when component unmounts
+    }
+  }, [notifications, user]);
 
   // Toggle the visibility of notifications and mark them as read when shown
   const toggleNotifications = useCallback(() => {
@@ -72,7 +112,7 @@ const NotificationBell = () => {
     if (!showNotifications && notifications.some((n) => !n.read)) {
       const db = getDatabase();
       const updates = {};
-      const encodedUserId = encodeEmail(user.email);  // Ensure the same encoded email is used for updates
+      const encodedUserId = encodeEmail(user.email);
 
       notifications.forEach((notification) => {
         if (!notification.read) {
@@ -91,7 +131,7 @@ const NotificationBell = () => {
   const handleNotificationClick = (ticketId) => {
     navigate(`/pdash`);  // Navigate to the ticket page
   };
-  
+
   return (
     <div className="notification-bell">
       <button
