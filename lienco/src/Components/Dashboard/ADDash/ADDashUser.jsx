@@ -11,12 +11,28 @@ import Chart from '../PMDashboard/chart.jsx'
 import Rchart from '../PMDashboard/rchart.jsx';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import ManageUserRoles from './ManageUserRoles'; // Import your role management component
+<<<<<<< HEAD
+import { getDatabase, ref, onValue } from 'firebase/database';
+import { getAuth } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate to handle routing
+import BudgetTracker from '../../Resources/budgettracker.jsx';
+import MeetingScheduler from '../PMDashboard/meetingscheduler.jsx';
+import Chart from '../PMDashboard/chart.jsx';
+import Rchart from '../PMDashboard/rchart.jsx';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
+=======
 import Carousel from './swiper.jsx'
+>>>>>>> 76007ba71582ffb2881601d3b498d16ec21a042f
 
 const ADDashUser = ({ onLogout, userRole, events }) => {
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const auth = getAuth();
+<<<<<<< HEAD
+  const user = auth.currentUser;
+  const navigate = useNavigate(); // Initialize useNavigate for navigation
+  const [meetings, setMeetings] = useState([]);
+=======
   const [weather, setWeather] = useState(null);
   const user = auth.currentUser;
   const navigate = useNavigate();  // Initialize useNavigate for navigation
@@ -48,6 +64,7 @@ const ADDashUser = ({ onLogout, userRole, events }) => {
     return meetingDate.toDateString() === today.toDateString();
   });
   
+>>>>>>> 76007ba71582ffb2881601d3b498d16ec21a042f
   const [isAssessVisible, setIsAssessVisible] = useState(false);
   const aRef = useRef(null);
 
@@ -61,6 +78,15 @@ const ADDashUser = ({ onLogout, userRole, events }) => {
     }
   };
 
+<<<<<<< HEAD
+  const today = new Date();
+  const todayMeetings = meetings.filter((meeting) => {
+    const meetingDate = meeting.start; // `start` is already converted to a Date
+    return meetingDate.toDateString() === today.toDateString();
+  });
+
+=======
+>>>>>>> 76007ba71582ffb2881601d3b498d16ec21a042f
   useEffect(() => {
     if (isAssessVisible) {
       document.addEventListener('mousedown', handleClickOutside);
@@ -77,7 +103,11 @@ const ADDashUser = ({ onLogout, userRole, events }) => {
   const db = getFirestore();
 
   function fetchMeetings(setMeetings) {
+<<<<<<< HEAD
+    const meetingsRef = collection(db, 'meetings');
+=======
     const meetingsRef = collection(db, "meetings");
+>>>>>>> 76007ba71582ffb2881601d3b498d16ec21a042f
     getDocs(meetingsRef)
       .then((querySnapshot) => {
         const meetings = querySnapshot.docs.map((doc) => {
@@ -90,6 +120,18 @@ const ADDashUser = ({ onLogout, userRole, events }) => {
         setMeetings(meetings);
       })
       .catch((error) => {
+<<<<<<< HEAD
+        console.error('Error fetching meetings: ', error);
+      });
+  }
+
+  // Handle notification click to navigate to the ticket
+  const handleNotificationClick = (ticketId) => {
+    navigate(`/pdash`); // Navigate to the ticket page with ticketId in URL
+  };
+
+  useEffect(() => {
+=======
         console.error("Error fetching meetings: ", error);
       });
   }
@@ -103,6 +145,7 @@ const ADDashUser = ({ onLogout, userRole, events }) => {
 
   useEffect(() => {
     fetchWeather();
+>>>>>>> 76007ba71582ffb2881601d3b498d16ec21a042f
     fetchMeetings(setMeetings);
 
     if (user) {
@@ -114,7 +157,11 @@ const ADDashUser = ({ onLogout, userRole, events }) => {
         const encodedUserId = encodeEmail(userEmail);
         const db = getDatabase();
         const notificationsRef = ref(db, `notifications/${encodedUserId}`);
+<<<<<<< HEAD
+
+=======
         
+>>>>>>> 76007ba71582ffb2881601d3b498d16ec21a042f
         const unsubscribe = onValue(
           notificationsRef,
           (snapshot) => {
@@ -143,6 +190,62 @@ const ADDashUser = ({ onLogout, userRole, events }) => {
   }, [user]);
 
   return (
+<<<<<<< HEAD
+    <div className="dashuser">
+      <Header onLogout={onLogout} />
+      <Sidebar userRole={userRole} />
+
+      <div className="dashcontent">
+        <div className="topbox">
+          <div className="topbox1"></div>
+          <div className="topbox2">
+            <h4>Scheduled Meetings</h4>
+            <p className="counting">{todayMeetings.length} meetings today</p>
+          </div>
+          <div className="topbox3"></div>
+          <div className="topbox4" onClick={toggleAform} style={{ cursor: 'pointer' }}>
+            <h4>Manage Roles</h4>
+          </div>
+        </div>
+        <div className="leftside">
+          <div className="dashtainer1">
+            <h4>Notifications</h4>
+            <ul>
+              {notifications.length > 0 ? (
+                notifications.map((notification) => (
+                  <li
+                    key={notification.id}
+                    onClick={() => handleNotificationClick(notification.ticketId)} // Click handler to navigate
+                    style={{ cursor: 'pointer', textDecoration: 'underline' }} // Style to make it clickable
+                  >
+                    <p>{notification.message}</p>
+                    <small>{new Date(notification.timestamp).toLocaleString()}</small>
+                  </li>
+                ))
+              ) : (
+                <p>No new notifications</p>
+              )}
+            </ul>
+          </div>
+
+          <div className="dashtainer2">
+            <div className="budgettracker">
+              <MeetingScheduler />
+            </div>
+          </div>
+
+          <div className="rghtside">
+            <div className="dashtainer3"></div>
+          </div>
+        </div>
+        {isAssessVisible && ( // Conditional rendering for modal
+          <div className="overlay">
+            <div className="form-container" ref={aRef}>
+              <ManageUserRoles onClose={toggleAform} />
+            </div>
+          </div>
+        )}
+=======
     <div className='addashuser'>
       <Header onLogout={onLogout} />
       <Sidebar userRole={userRole} />
@@ -222,6 +325,7 @@ const ADDashUser = ({ onLogout, userRole, events }) => {
            </div>
          </div>
           )}
+>>>>>>> 76007ba71582ffb2881601d3b498d16ec21a042f
       </div>
     </div>
   );

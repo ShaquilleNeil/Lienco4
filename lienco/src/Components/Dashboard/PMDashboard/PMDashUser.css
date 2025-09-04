@@ -68,6 +68,51 @@
  gap: 20px;
 }
 
+.overlay {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; 
+}
+
+/* Form container style */
+.form-container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 500px;
+  max-width: 90vw; 
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 18px;
+  background: none;
+  border: none;
+  color: #000;
+}
+
+/* Success and error messages */
+.success-message {
+  color: green;
+}
+
+.error-message {
+  color: red;
+}
+
 .dashtainer1 {
 
   height: 455px; /* Adjust height to fit content */
