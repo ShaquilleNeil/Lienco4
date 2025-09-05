@@ -1,5 +1,14 @@
 {
   "dependencies": {
     "react-gauge-chart": "^0.5.1"
+  },
+
+  "homepage": "https://ShaquilleNeil.github.io/Lienco4"
+,
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   }
 }

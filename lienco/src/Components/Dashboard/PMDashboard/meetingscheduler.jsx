@@ -33,8 +33,6 @@ const MeetingScheduler = ({ onMeetingScheduled }) => {
     }
   };
 
-<<<<<<< HEAD
-=======
   // Fetch events from Firestore to display on page load
   const fetchEvents = async () => {
     try {
@@ -71,7 +69,6 @@ const MeetingScheduler = ({ onMeetingScheduled }) => {
           // Show only events that belong to the logged-in user
           filteredEvents = eventList.filter(event => event.userEmail === user.email);
         }
->>>>>>> 76007ba71582ffb2881601d3b498d16ec21a042f
 
         console.log("Fetched Events from Firestore:", filteredEvents); // Debugging line
         setEvents(filteredEvents);
@@ -190,5 +187,6 @@ const MeetingScheduler = ({ onMeetingScheduled }) => {
     </div>
   );
 };
+
 
 export default MeetingScheduler;
